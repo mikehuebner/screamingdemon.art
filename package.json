@@ -7,9 +7,10 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build",
     "dev": "turbo run dev --parallel",
-    "dev:next": "turbo run dev --filter=next",
+    "build": "turbo run build",
+    "build:web": "turbo run build --filter=web",
+    "build:sanity": "turbo run build --filter=sanity",
     "lint": "run-p lint:*",
     "lint:eslint": "turbo run lint --continue",
     "lint:types": "tsc --build",
@@ -35,5 +36,6 @@
     "rimraf": "^3.0.2",
     "turbo": "latest",
     "typescript": "^4.9.0"
-  }
+  },
+  "packageManager": "yarn@3.2.1"
 }

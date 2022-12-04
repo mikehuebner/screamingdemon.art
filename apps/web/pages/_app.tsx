@@ -10,7 +10,7 @@ import 'raf/polyfill'
 
 import type { SolitoAppProps } from 'solito'
 
-function MyApp({ Component, pageProps }: SolitoAppProps) {
+export default function MyApp({ Component, pageProps }: SolitoAppProps) {
   const [theme, setTheme] = useRootTheme()
 
   const contents = useMemo(() => {
@@ -34,5 +34,3 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
     </>
   )
 }
-
-export default MyApp
