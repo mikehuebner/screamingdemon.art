@@ -1,4 +1,4 @@
-# 👹 [screamingdemon.art](https://screamingdemon.art)
+# 👹 [Screaming Demon Art](https://screamingdemon.art)
 
 ## 🔦 About
 
