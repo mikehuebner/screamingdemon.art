@@ -17,11 +17,11 @@
     "watch": "tamagui-build --watch"
   },
   "dependencies": {
-    "@screamingdemonart/config": "workspace:*",
+    "@screamingdemonart/config": "*",
     "tamagui": "^1.0.1-beta.226"
   },
   "devDependencies": {
-    "@screamingdemonart/tsconfig": "workspace:*",
+    "@screamingdemonart/tsconfig": "*",
     "@tamagui/build": "^1.0.1-beta.226"
   }
 }
