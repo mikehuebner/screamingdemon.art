@@ -1,4 +1,4 @@
-import { config } from '@screamingdemonart/config'
+import { config } from '@screamingdemonart/ui'
 
 export type Conf = typeof config
 

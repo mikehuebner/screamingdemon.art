@@ -17,7 +17,10 @@
     "watch": "tamagui-build --watch"
   },
   "dependencies": {
-    "@screamingdemonart/config": "*",
+    "@tamagui/animations-react-native": "1.0.1-beta.226",
+    "@tamagui/font-inter": "1.0.1-beta.226",
+    "@tamagui/shorthands": "1.0.1-beta.226",
+    "@tamagui/theme-base": "1.0.1-beta.226",
     "tamagui": "^1.0.1-beta.226"
   },
   "devDependencies": {

@@ -41,7 +41,7 @@ You can remove this log in next.config.js.
 
 const plugins = [
   withImages,
-  withTM(['solito', 'react-native-web', '@screamingdemonart/config']),
+  withTM(['solito', 'react-native-web', '@screamingdemonart/ui']),
   withTamagui({
     config: './tamagui.config.ts',
     components: ['tamagui', '@screamingdemonart/ui'],

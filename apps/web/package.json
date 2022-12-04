@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@screamingdemonart/app": "*",
-    "@screamingdemonart/config": "*",
     "@screamingdemonart/ui": "*",
     "@tamagui/next-theme": "1.0.1-beta.226",
     "next": "^13.0.4",
