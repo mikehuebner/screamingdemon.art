@@ -2,6 +2,10 @@
   "name": "screamingdemon.art",
   "version": "0.0.0",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
@@ -22,19 +26,14 @@
     "@changesets/get-release-plan": "^3.0.15",
     "@changesets/types": "^5.2.0",
     "@manypkg/cli": "^0.19.2",
+    "@sanity/cli": "latest",
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.25",
     "@types/react-native": "^0.70.7",
     "npm-run-all": "^4.1.5",
     "prettier": "latest",
     "rimraf": "^3.0.2",
-    "turbo": "latest"
-  },
-  "engines": {
-    "npm": "please-use-pnpm",
-    "npx": "please-use-pnpm",
-    "yarn": "please-use-pnpm",
-    "node": ">=16.11.0"
-  },
-  "packageManager": "pnpm@7.17.0"
+    "turbo": "latest",
+    "typescript": "^4.9.0"
+  }
 }

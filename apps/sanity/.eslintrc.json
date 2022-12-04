@@ -1,0 +1,3 @@
+{
+  "extends": ["@screamingdemonart/eslint-config-screamingdemonart", "@sanity/eslint-config-studio"]
+}
