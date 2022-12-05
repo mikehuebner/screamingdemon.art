@@ -1,8 +1,7 @@
-import { config } from './config';
-export type Conf = typeof config;
+import { config } from './config'
+export type Conf = typeof config
 declare module 'tamagui' {
-    interface TamaguiCustomConfig extends Conf {
-    }
+  interface TamaguiCustomConfig extends Conf {}
 }
-export default config;
+export default config
 //# sourceMappingURL=global.d.ts.map
