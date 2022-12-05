@@ -1,3 +1,6 @@
 {
-  "extends": ["@screamingdemonart/eslint-config-screamingdemonart", "next/core-web-vitals"]
+  "extends": ["@screamingdemonart/eslint-config-screamingdemonart", "next/core-web-vitals"],
+  "rules": {
+    "@next/next/no-html-link-for-pages": ["error", "apps/web/pages/"]
+  }
 }

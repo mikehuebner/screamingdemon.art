@@ -1,6 +1,6 @@
 module.exports = {
   extends: ['prettier', 'plugin:@typescript-eslint/eslint-recommended'],
-  plugins: ['react', 'import', '@typescript-eslint'],
+  plugins: ['import', '@typescript-eslint'],
   rules: {
     '@typescript-eslint/no-unused-vars': [
       'error',
@@ -57,12 +57,12 @@ module.exports = {
             position: 'before',
           },
           {
-            pattern: '@chakra-ui/**',
+            pattern: 'tamagui',
             group: 'external',
             position: 'before',
           },
           {
-            pattern: '@web**',
+            pattern: '~**',
             group: 'external',
             position: 'after',
           },
@@ -70,8 +70,9 @@ module.exports = {
         pathGroupsExcludedImportTypes: [
           'react**',
           'react**/**',
-          '@chakra-ui/**',
-          '@flystagyo/**',
+          'tamagui',
+          '@screamingdemonart/**',
+          '~/**',
         ],
         warnOnUnassignedImports: true,
       },

@@ -1,6 +1,7 @@
-import NextDocument, { Head, Html, Main, NextScript } from 'next/document'
 import { Children } from 'react'
 import { AppRegistry } from 'react-native'
+
+import NextDocument, { Head, Html, Main, NextScript } from 'next/document'
 
 import Tamagui from '../tamagui.config'
 
