@@ -1,4 +1,5 @@
 {
   "outputDirectory": "apps/sanity/dist",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD ./",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
