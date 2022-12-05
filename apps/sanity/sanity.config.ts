@@ -6,7 +6,7 @@ export default defineConfig({
   name: 'default',
   title: 'Screaming Demon Art',
 
-  projectId: '3ipunxqe',
+  projectId: 'bldpsrfv',
   dataset: 'production',
 
   plugins: [deskTool()],
