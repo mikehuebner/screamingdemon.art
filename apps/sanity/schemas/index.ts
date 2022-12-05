@@ -42,19 +42,55 @@ import home from './singletons/home'
 import settings from './singletons/settings'
 
 const annotations = [
+  /**
+   * @shopify
+   */
+
   annotationLinkEmail,
   annotationLinkExternal,
   annotationLinkInternal,
   annotationProduct,
+
+  /**
+   * @screamingdemonart
+   */
 ]
 
-const documents = [collection, colorTheme, page, product, productVariant]
+const documents = [
+  /**
+   * @shopify
+   */
 
-const singletons = [home, settings]
+  collection,
+  colorTheme,
+  page,
+  product,
+  productVariant,
+
+  /**
+   * @screamingdemonart
+   */
+]
+
+const singletons = [
+  /**
+   * @shopify
+   */
+
+  home,
+  settings,
+
+  /**
+   * @screamingdemonart
+   */
+]
 
 const blocks = [body]
 
 const objects = [
+  /**
+   * @shopify
+   */
   customProductOptionColor,
   customProductOptionSize,
   imageWithProductHotspots,
@@ -85,6 +121,10 @@ const objects = [
   shopifyCollectionRule,
   shopifyProduct,
   shopifyProductVariant,
+
+  /**
+   * @screamingdemonart
+   */
 ]
 
 export const schemaTypes = [...annotations, ...documents, ...singletons, ...objects, ...blocks]
