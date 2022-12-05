@@ -1,4 +1,4 @@
 {
-  "version": 3,
+  "outputDirectory": "apps/sanity/dist",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
