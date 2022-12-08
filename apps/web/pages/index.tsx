@@ -1,15 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
-import {
-  Stack,
-  Button,
-  H1,
-  MyComponent,
-  Paragraph,
-  Sheet,
-  XStack,
-  YStack,
-} from '@screamingdemonart/ui'
+import { Stack, Button, MyComponent, Paragraph, Sheet, XStack, YStack } from '@screamingdemonart/ui'
 import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
 import { useLink } from 'solito/link'
 
@@ -32,6 +23,7 @@ export default function HomeScreen() {
         </YStack>
 
         <XStack>
+          {/* @ts-ignore onclick method not working with solito */}
           <Button {...linkProps}>Check out a list of artists</Button>
         </XStack>
 

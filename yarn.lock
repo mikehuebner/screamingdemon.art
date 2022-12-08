@@ -2638,7 +2638,7 @@
     "@tamagui/text" "^1.0.1-rc.0.3"
     "@tamagui/use-event" "^1.0.1-rc.0.3"
 
-"@tamagui/build@^1.0.1-rc.0.3", "@tamagui/build@^^1.0.1-rc.0.3":
+"@tamagui/build@^1.0.1-rc.0.3":
   version "1.0.1-rc.0.3"
   resolved "https://registry.yarnpkg.com/@tamagui/build/-/build-1.0.1-rc.0.3.tgz#a09d5e01438c5cef3e3e976b0cce6963212f955c"
   integrity sha512-FMD+MNmewi0qeZNvq52ZuaTAoAHOyOO+9seuLWXkSJJuWxaDRQT6Lu7SV5//J7j0SGXH+Xg9b6+S868bS8rZ7g==
@@ -10207,7 +10207,7 @@ tamagui-loader@^1.0.1-rc.0.3:
     fs-extra "^10.1.0"
     lodash "^4.17.21"
 
-tamagui@^1.0.1-rc.0.3, tamagui@^^1.0.1-rc.0.3:
+tamagui@^1.0.1-rc.0.3:
   version "1.0.1-rc.0.3"
   resolved "https://registry.yarnpkg.com/tamagui/-/tamagui-1.0.1-rc.0.3.tgz#c603c7302933a9323d528362aeaf1d6dd5c54780"
   integrity sha512-TEXIG4+HQwvEeL5v+uLIQYCR7/Gsa0FkCfLFMK/k02dOO+Rd6bPP9S0FCIxe6YKkycBSFqLa78Ozs+E4WY8Qnw==

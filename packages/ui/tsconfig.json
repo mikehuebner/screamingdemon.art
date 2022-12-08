@@ -1,10 +1,38 @@
 {
-  "extends": "@screamingdemonart/tsconfig/react-library.json",
-  "include": ["src"],
+  "display": "Default",
   "compilerOptions": {
+    "baseUrl": "../../",
+    "rootDir": "../../",
+    "include": ["src"],
     "composite": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
     "esModuleInterop": true,
-    "jsx": "preserve"
+    "preserveSymlinks": true,
+    "incremental": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "noEmitOnError": false,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "experimentalDecorators": true,
+    "useUnknownInCatchVariables": false,
+    "preserveConstEnums": true,
+    "removeComments": false,
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "strictNullChecks": true,
+    "target": "es2019",
+    "types": ["node"],
+    "lib": ["es2021", "dom", "esnext"]
   },
-  "references": []
+  "typeAcquisition": {
+    "enable": true
+  },
+  "exclude": ["_"]
 }

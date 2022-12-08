@@ -47,6 +47,7 @@ export default function ArtistDetailsScreen({ name }: ArtistParams) {
       <Paragraph ta="center" fow="800">
         {artistData.bio}
       </Paragraph>
+      {/* @ts-ignore fix button props not lining up */}
       <Button {...linkProps} icon={ChevronLeft}>
         Go Home
       </Button>

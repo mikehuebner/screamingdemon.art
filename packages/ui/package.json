@@ -21,10 +21,9 @@
     "@tamagui/font-inter": "^1.0.1-rc.0.3",
     "@tamagui/shorthands": "^1.0.1-rc.0.3",
     "@tamagui/theme-base": "^1.0.1-rc.0.3",
-    "tamagui": "^^1.0.1-rc.0.3"
+    "tamagui": "^1.0.1-rc.0.3"
   },
   "devDependencies": {
-    "@screamingdemonart/tsconfig": "*",
-    "@tamagui/build": "^^1.0.1-rc.0.3"
+    "@tamagui/build": "^1.0.1-rc.0.3"
   }
 }

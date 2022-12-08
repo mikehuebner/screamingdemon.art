@@ -1,4 +1,6 @@
-// override react-native types with react-native-web types
+/**
+ * Override react native types for local components
+ */
 import 'react-native'
 
 declare module 'react-native' {
@@ -28,10 +30,4 @@ declare module 'react-native' {
     }
     onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
   }
-}
-
-declare module '*.svg' {
-  import { ReactElement, SVGProps } from 'react'
-  const content: (props: SVGProps<SVGElement>) => ReactElement
-  export default content
 }

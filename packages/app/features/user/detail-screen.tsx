@@ -13,6 +13,7 @@ export function UserDetailScreen() {
   return (
     <YStack f={1} jc="center" ai="center" space>
       <Paragraph ta="center" fow="800">{`User ID: ${id}`}</Paragraph>
+      {/* @ts-ignore fix button props not lining up */}
       <Button {...linkProps} icon={ChevronLeft}>
         Go Home
       </Button>

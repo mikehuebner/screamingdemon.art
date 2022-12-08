@@ -10,7 +10,8 @@
     "baseUrl": ".",
     "paths": {
       "react-native": ["react-native-web"],
-      "~/*": ["*"]
+      "~/*": ["*"],
+      "*": ["types"]
     },
     "allowJs": true,
     "skipLibCheck": true,
@@ -25,6 +26,16 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "**/*.svg"],
+  "typeAcquisition": {
+    "enable": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "./types/**/*.d.ts",
+    "**/*.svg"
+  ],
   "exclude": ["node_modules"]
 }

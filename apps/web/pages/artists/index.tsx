@@ -23,6 +23,7 @@ const ArtistButton = ({ name, slug }: Artist) => {
     as: `/artists/${slug}`,
   })
 
+  // @ts-ignore fix button props not lining up
   return <Button {...linkProps}>{name}</Button>
 }
 
@@ -42,6 +43,7 @@ export default function ArtistsScreen() {
           <ArtistButton key={artist._id} {...artist} />
         ))}
       </Stack>
+      {/* @ts-ignore fix button props not lining up */}
       <Button {...linkProps} icon={ChevronLeft}>
         Go Home
       </Button>

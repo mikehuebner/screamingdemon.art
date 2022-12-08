@@ -1,12 +1,15 @@
-import React, { useMemo } from 'react'
+/* eslint-disable import/order */
 
-import { Provider } from '@screamingdemonart/app/provider'
+import 'raf/polyfill'
 import '@tamagui/core/reset.css'
 import '@tamagui/font-inter/css/400.css'
 import '@tamagui/font-inter/css/700.css'
+
+import { useMemo } from 'react'
+
+import { Provider } from '@screamingdemonart/app/provider'
 import { NextThemeProvider, useRootTheme } from '@tamagui/next-theme'
 import Head from 'next/head'
-import 'raf/polyfill'
 
 import { trpc } from '~/utils'
 

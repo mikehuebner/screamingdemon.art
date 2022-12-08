@@ -11,7 +11,7 @@ import {
   YStack,
 } from '@screamingdemonart/ui'
 import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useLink } from 'solito/link'
 
 export function HomeScreen() {
