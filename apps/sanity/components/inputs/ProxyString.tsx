@@ -1,7 +1,7 @@
 import { LockIcon } from '@sanity/icons'
 import { Box, Text, TextInput, Tooltip } from '@sanity/ui'
-import { StringInputProps, useFormValue, SanityDocument, StringSchemaType } from 'sanity'
 import get from 'lodash.get'
+import { StringInputProps, useFormValue, SanityDocument, StringSchemaType } from 'sanity'
 
 type Props = StringInputProps<StringSchemaType & { options?: { field?: string } }>
 

@@ -3,8 +3,10 @@ import annotationLinkExternal from './annotations/linkExternal'
 import annotationLinkInternal from './annotations/linkInternal'
 import annotationProduct from './annotations/product'
 import body from './blocks/body'
+import artists from './documents/artists'
 import collection from './documents/collection'
 import colorTheme from './documents/colorTheme'
+import featuredArtists from './documents/featuredArtists'
 import page from './documents/page'
 import product from './documents/product'
 import productVariant from './documents/productVariant'
@@ -70,6 +72,9 @@ const documents = [
   /**
    * @screamingdemonart
    */
+
+  artists,
+  featuredArtists,
 ]
 
 const singletons = [
@@ -77,12 +82,13 @@ const singletons = [
    * @shopify
    */
 
-  home,
   settings,
 
   /**
    * @screamingdemonart
    */
+
+  home,
 ]
 
 const blocks = [body]
@@ -91,6 +97,7 @@ const objects = [
   /**
    * @shopify
    */
+
   customProductOptionColor,
   customProductOptionSize,
   imageWithProductHotspots,

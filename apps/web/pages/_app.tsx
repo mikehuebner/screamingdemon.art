@@ -26,7 +26,9 @@ function App({ Component, pageProps }: SolitoAppProps) {
         <title>Tamagui Example App</title>
         <meta name="description" content="Tamagui, Solito, Expo & Next.js" />
         <meta name="facebook-domain-verification" content="2n0sgaiqhciczrlf4ii09bqqi6787z" />
-        <link rel="icon" href="/favicon.ico" />
+        <link href="/favicon.svg" rel="icon" />
+        <link href="/favicon-light.svg" rel="icon" media="(prefers-color-scheme: light)" />
+        <link href="/favicon-dark.svg" rel="icon" media="(prefers-color-scheme: dark)" />
       </Head>
       <NextThemeProvider onChangeTheme={setTheme}>
         <Provider disableRootThemeClass defaultTheme={theme}>

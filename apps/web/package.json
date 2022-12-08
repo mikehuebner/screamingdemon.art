@@ -36,6 +36,7 @@
     "@screamingdemonart/eslint-config-screamingdemonart": "*",
     "@screamingdemonart/sanity": "*",
     "@screamingdemonart/tsconfig": "*",
+    "@svgr/webpack": "^6.5.1",
     "@tamagui/next-plugin": "1.0.1-beta.226",
     "@types/node": "^18.6.4",
     "eslint": "^8.29.0",

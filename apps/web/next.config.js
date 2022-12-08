@@ -60,6 +60,16 @@ module.exports = function () {
       scrollRestoration: true,
       legacyBrowsers: false,
     },
+
+    webpack(config) {
+      config.module.rules.push({
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ['@svgr/webpack'],
+      })
+
+      return config
+    },
   }
 
   for (const plugin of plugins) {

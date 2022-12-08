@@ -1,12 +1,11 @@
 import { SanityClient } from 'next-sanity'
 
 import * as trpc from '@trpc/server'
-import { CreateNextContextOptions } from '@trpc/server/adapters/next'
 
-import { sanity } from './sanity'
+import { createSanity } from './sanity'
 
 interface CreateContextOptions {
-  session: any | null
+  session?: any | null
   sanity: SanityClient
 }
 
@@ -25,8 +24,9 @@ export async function createContextInner(opts: CreateContextOptions) {
  * Creates context for an incoming request
  * @link https://trpc.io/docs/context
  */
-export async function createContext(opts: CreateNextContextOptions) {
+export async function createContext() {
   // for API-response caching see https://trpc.io/docs/caching
+  const sanity = createSanity()
 
   return await createContextInner({
     session: null,
