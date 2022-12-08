@@ -17,28 +17,6 @@ const boolVals = {
 const disableExtraction =
   boolVals[process.env.DISABLE_EXTRACTION] ?? process.env.NODE_ENV === 'development'
 
-console.log(`
-
-Welcome to Tamagui!
-
-We've set up a few things for you. Note the "excludeReactNativeWebExports" setting
-in next.config.js which omits these from the bundle:
-
-- Switch, ProgressBar, Picker, CheckBox, Touchable
-
-Add these to save more, if you don't need them:
-
-- AnimatedFlatList, FlatList, SectionList, VirtualizedList, VirtualizedSectionList
-
-Even better, enable "useReactNativeWebLite" to avoid excludeReactNativeWebExports and
-get tree-shaking and concurrent mode support.
-
-🐤
-
-You can remove this log in next.config.js.
-
-`)
-
 const plugins = [
   withImages,
   withTM(['solito', 'react-native-web', '@screamingdemonart/ui']),
@@ -63,12 +41,22 @@ module.exports = function () {
   /** @type {import('next').NextConfig} */
   let config = {
     typescript: {
-      ignoreBuildErrors: true,
+      // Set this to false if you want production builds to abort if there's type errors
+      ignoreBuildErrors: process.env.VERCEL_ENV === 'production',
     },
+
+    eslint: {
+      /// Set this to false if you want production builds to abort if there's lint errors
+      ignoreDuringBuilds: process.env.VERCEL_ENV === 'production',
+    },
+
     images: {
+      remotePatterns: [{ hostname: 'cdn.sanity.io' }, { hostname: 'source.unsplash.com' }],
       disableStaticImages: true,
     },
+
     experimental: {
+      appDir: true,
       scrollRestoration: true,
       legacyBrowsers: false,
     },

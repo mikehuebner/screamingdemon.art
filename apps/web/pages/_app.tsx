@@ -8,9 +8,11 @@ import { NextThemeProvider, useRootTheme } from '@tamagui/next-theme'
 import Head from 'next/head'
 import 'raf/polyfill'
 
+import { trpc } from '~/utils'
+
 import type { SolitoAppProps } from 'solito'
 
-export default function MyApp({ Component, pageProps }: SolitoAppProps) {
+function App({ Component, pageProps }: SolitoAppProps) {
   const [theme, setTheme] = useRootTheme()
 
   const contents = useMemo(() => {
@@ -34,3 +36,5 @@ export default function MyApp({ Component, pageProps }: SolitoAppProps) {
     </>
   )
 }
+
+export default trpc.withTRPC(App)

@@ -1,3 +1,14 @@
-import { HomeScreen } from '@screamingdemonart/app/features/home/screen'
+import { Stack, Text } from '@screamingdemonart/ui'
 
-export default HomeScreen
+import { trpc } from '~/utils'
+
+export default function HomeScreen() {
+  const { data: productData } = trpc.home.content.useQuery()
+  console.log({ productData })
+
+  return (
+    <Stack>
+      <Text>Hello, world!</Text>
+    </Stack>
+  )
+}
