@@ -6,58 +6,33 @@ import {
   H1,
   MyComponent,
   Paragraph,
-  Separator,
   Sheet,
   XStack,
   YStack,
-  H3,
 } from '@screamingdemonart/ui'
 import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
+import { useLink } from 'solito/link'
 
-import { HeadLogo } from '~/components/logo'
-import { createSSG } from '~/server'
-import { trpc } from '~/utils'
-
-export async function getServerSideProps() {
-  const ssg = await createSSG()
-
-  await ssg.artists.list.prefetch()
-
-  return {
-    props: {
-      trpcState: ssg.dehydrate(),
-    },
-  }
-}
+import { HeadLogo, WordLogo } from '~/components/logo'
 
 export default function HomeScreen() {
-  const { data: artistData } = trpc.artists.list.useQuery()
+  const linkProps = useLink({
+    href: '/artists',
+  })
 
   return (
     <Stack>
       <YStack f={1} jc="center" ai="center" p="$4" space>
         <YStack space="$4" maw={600}>
-          <HeadLogo fill="grey" />
-          <H1 ta="center">Screaming Demon Art</H1>
+          <HeadLogo fill="lightgrey" />
+          <WordLogo fill="lightgrey" />
           <Paragraph ta="center">
             {`This is coming dynamically from the server. It's a list of artists:`}
           </Paragraph>
-
-          <Stack>
-            <Separator />
-            {artistData?.map((artist) => (
-              <>
-                <H3 ta="center" key={artist._id}>
-                  {artist.name}
-                </H3>
-                <Paragraph>{artist.bio}</Paragraph>
-              </>
-            ))}
-          </Stack>
         </YStack>
 
         <XStack>
-          <Button>Link to user</Button>
+          <Button {...linkProps}>Check out a list of artists</Button>
         </XStack>
 
         <MyComponent w={50} h={50} blue />

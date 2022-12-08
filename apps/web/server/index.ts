@@ -19,3 +19,5 @@ export const createSSG = async () =>
     ctx: await createContext(),
     transformer: SuperJSON,
   })
+
+export * from './trpc/router/artists'

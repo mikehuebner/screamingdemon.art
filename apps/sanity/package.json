@@ -30,6 +30,7 @@
   "devDependencies": {
     "@sanity/eslint-config-studio": "^2.0.1",
     "@types/lodash.get": "^4.4.7",
+    "@types/slug": "^5.0.3",
     "eslint": "^8.29.0"
   }
 }

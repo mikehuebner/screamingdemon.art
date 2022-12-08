@@ -3,8 +3,8 @@ import slug from 'slug'
 
 const MAX_LENGTH = 96
 
-export const validateSlug = (Rule: Rule) => {
-  return Rule.required().custom(async (value: Slug) => {
+export const validateSlug = (Rule: Rule) =>
+  Rule.required().custom(async (value: Slug) => {
     const currentSlug = value && value.current
     if (!currentSlug) {
       return true
@@ -17,6 +17,6 @@ export const validateSlug = (Rule: Rule) => {
     if (currentSlug !== slug(currentSlug, { lower: true })) {
       return 'Must be a valid slug'
     }
+
     return true
   })
-}

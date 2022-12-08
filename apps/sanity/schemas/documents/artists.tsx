@@ -1,6 +1,8 @@
 import { HeartFilledIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
+import { validateSlug } from '../../utils/validateSlug'
+
 const GROUPS = [
   {
     default: true,
@@ -20,15 +22,6 @@ export default defineType({
   icon: HeartFilledIcon,
   groups: GROUPS,
   fields: [
-    // Featured Toggle
-    defineField({
-      name: 'isFeatured',
-      title: 'Featured',
-      type: 'boolean',
-      group: 'content',
-    }),
-
-    // Title
     defineField({
       name: 'name',
       type: 'string',
@@ -40,6 +33,14 @@ export default defineType({
       name: 'bio',
       type: 'text',
       group: 'content',
+    }),
+
+    defineField({
+      name: 'slug',
+      type: 'slug',
+      options: { source: 'name' },
+      // @ts-ignore - TODO - fix this TS error
+      validation: validateSlug,
     }),
 
     // Modules

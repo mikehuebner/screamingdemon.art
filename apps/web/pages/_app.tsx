@@ -23,8 +23,11 @@ function App({ Component, pageProps }: SolitoAppProps) {
   return (
     <>
       <Head>
-        <title>Tamagui Example App</title>
-        <meta name="description" content="Tamagui, Solito, Expo & Next.js" />
+        <title>Screaming Demon Art</title>
+        <meta
+          name="description"
+          content="A Las Vegas based art gallery located in the Arts District."
+        />
         <meta name="facebook-domain-verification" content="2n0sgaiqhciczrlf4ii09bqqi6787z" />
         <link href="/favicon.svg" rel="icon" />
         <link href="/favicon-light.svg" rel="icon" media="(prefers-color-scheme: light)" />
