@@ -38,6 +38,7 @@ export default function HomeScreen() {
 function SheetDemo() {
   const [open, setOpen] = useState(false)
   const [position, setPosition] = useState(0)
+
   return (
     <>
       <Button

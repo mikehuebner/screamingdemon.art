@@ -21,7 +21,7 @@ export type Artist = {
   name: string
   bio?: string
   slug: string
-  gallery: ImageSource[]
+  gallery: ImageSource[] | null
 }
 
 export const artistsRouter = router({

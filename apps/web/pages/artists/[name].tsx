@@ -101,13 +101,13 @@ export default function ArtistDetailsScreen({ name }: ArtistPageProps) {
     <YStack f={1} jc="center" space>
       <H1 fow="800">{`${artistData.name}`}</H1>
       <Paragraph fow="800">{artistData.bio}</Paragraph>
-      <Gallery images={artistData.gallery} />
+      {artistData.gallery && <Gallery images={artistData.gallery} />}
       <Masonry
         breakpointCols={3}
         className="screamingdemonart-masonry-grid"
         columnClassName="screamingdemonart-masonry-grid_column"
       >
-        {artistData.gallery.map((image) => (
+        {artistData.gallery?.map((image) => (
           <Stack bg="#5A5A5A" m="$2" br="$3" overflow="hidden" key={image.asset._id}>
             <DisplayImage image={image} />
           </Stack>
