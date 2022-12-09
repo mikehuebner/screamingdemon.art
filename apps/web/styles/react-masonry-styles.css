@@ -1,0 +1,8 @@
+.screamingdemonart-masonry-grid {
+  display: flex;
+  width: auto;
+}
+
+.screamingdemonart-masonry-grid_column {
+  background-clip: padding-box;
+}

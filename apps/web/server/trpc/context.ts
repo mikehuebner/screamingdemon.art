@@ -26,7 +26,7 @@ export async function createContextInner(opts: CreateContextOptions) {
  */
 export async function createContext() {
   // for API-response caching see https://trpc.io/docs/caching
-  const sanity = createSanity()
+  const sanity = createSanity
 
   return await createContextInner({
     session: null,
