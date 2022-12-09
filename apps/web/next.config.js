@@ -1,8 +1,10 @@
 const { join } = require('path')
 
+const withPlugins = require('next-compose-plugins')
 const withImages = require('next-images')
 const withTM = require('next-transpile-modules')
 
+const { withExpo } = require('@expo/next-adapter')
 const { withTamagui } = require('@tamagui/next-plugin')
 
 process.env.IGNORE_TS_CONFIG_PATHS = 'true'
@@ -17,29 +19,47 @@ const boolVals = {
 const disableExtraction =
   boolVals[process.env.DISABLE_EXTRACTION] ?? process.env.NODE_ENV === 'development'
 
-const plugins = [
-  withImages,
-  withTM(['solito', 'react-native-web', '@screamingdemonart/ui']),
-  withTamagui({
-    config: './tamagui.config.ts',
-    components: ['tamagui', '@screamingdemonart/ui'],
-    importsWhitelist: ['constants.js', 'colors.js'],
-    logTimings: true,
-    disableExtraction,
-    // experiment - reduced bundle size react-native-web
-    useReactNativeWebLite: false,
-    shouldExtract: (path) => {
-      if (path.includes(join('packages', 'app'))) {
-        return true
-      }
-    },
-    excludeReactNativeWebExports: ['Switch', 'ProgressBar', 'Picker', 'CheckBox', 'Touchable'],
-  }),
-]
-
-module.exports = function () {
-  /** @type {import('next').NextConfig} */
-  let config = {
+/** @type {import('next').NextConfig} */
+module.exports = withPlugins(
+  [
+    withImages,
+    withTM([
+      'solito',
+      'react-native-web',
+      'expo-linking',
+      'expo-constants',
+      'expo-modules-core',
+      'react-native-reanimated',
+      'react-native-gesture-handler',
+      'react-native-reanimated-carousel',
+      '@screamingdemonart/ui',
+    ]),
+    withTamagui({
+      config: './tamagui.config.ts',
+      components: ['tamagui', '@screamingdemonart/ui'],
+      importsWhitelist: ['constants.js', 'colors.js'],
+      logTimings: true,
+      disableExtraction,
+      // experiment - reduced bundle size react-native-web
+      useReactNativeWebLite: false,
+      shouldExtract: (path) => {
+        if (path.includes(join('packages', 'app'))) {
+          return true
+        }
+      },
+      excludeReactNativeWebExports: [
+        'Switch',
+        'ProgressBar',
+        'Picker',
+        'CheckBox',
+        'Touchable',
+        'Animated',
+        'AnimatedFlatList',
+      ],
+    }),
+    [withExpo, { projectRoot: __dirname }],
+  ],
+  {
     typescript: {
       // Set this to false if you want production builds to abort if there's type errors
       ignoreBuildErrors: process.env.VERCEL_ENV === 'production',
@@ -51,8 +71,8 @@ module.exports = function () {
     },
 
     images: {
-      remotePatterns: [{ hostname: 'cdn.sanity.io' }, { hostname: 'source.unsplash.com' }],
-      disableStaticImages: true,
+      domains: ['cdn.sanity.io'],
+      loader: 'custom',
     },
 
     experimental: {
@@ -68,16 +88,14 @@ module.exports = function () {
         use: ['@svgr/webpack'],
       })
 
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        'react-native$': 'react-native-web',
+        'react-native-reanimated': require.resolve('react-native-reanimated'),
+        'react-native-reanimated$': require.resolve('react-native-reanimated'),
+      }
+
       return config
     },
   }
-
-  for (const plugin of plugins) {
-    config = {
-      ...config,
-      ...plugin(config),
-    }
-  }
-
-  return config
-}
+)

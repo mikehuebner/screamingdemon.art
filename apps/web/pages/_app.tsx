@@ -1,6 +1,7 @@
 /* eslint-disable import/order */
 
 import 'raf/polyfill'
+import 'setimmediate'
 import '@tamagui/core/reset.css'
 import '@tamagui/font-inter/css/400.css'
 import '@tamagui/font-inter/css/700.css'
@@ -10,6 +11,8 @@ import { useMemo } from 'react'
 import { Provider } from '@screamingdemonart/app/provider'
 import { NextThemeProvider, useRootTheme } from '@tamagui/next-theme'
 import Head from 'next/head'
+
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 import { trpc } from '~/utils'
 
@@ -36,11 +39,13 @@ function App({ Component, pageProps }: SolitoAppProps) {
         <link href="/favicon-light.svg" rel="icon" media="(prefers-color-scheme: light)" />
         <link href="/favicon-dark.svg" rel="icon" media="(prefers-color-scheme: dark)" />
       </Head>
-      <NextThemeProvider onChangeTheme={setTheme}>
-        <Provider disableRootThemeClass defaultTheme={theme}>
-          {contents}
-        </Provider>
-      </NextThemeProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <NextThemeProvider onChangeTheme={setTheme}>
+          <Provider disableRootThemeClass defaultTheme={theme}>
+            {contents}
+          </Provider>
+        </NextThemeProvider>
+      </GestureHandlerRootView>
     </>
   )
 }

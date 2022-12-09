@@ -1,3 +1,5 @@
+/* eslint-disable import/order */
+// import 'react-native-gesture-handler'
 import { Children } from 'react'
 import { AppRegistry } from 'react-native'
 

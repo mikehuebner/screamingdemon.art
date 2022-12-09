@@ -1,8 +1,8 @@
 import { colorInput } from '@sanity/color-input'
 import { visionTool } from '@sanity/vision'
-import { defineConfig, isDev } from 'sanity'
+import { AssetSource, defineConfig, isDev } from 'sanity'
 import { imageHotspotArrayPlugin } from 'sanity-plugin-hotspot-array'
-import { media } from 'sanity-plugin-media'
+import { media, mediaAssetSource } from 'sanity-plugin-media'
 import { deskTool } from 'sanity/desk'
 
 import { structure } from './desk'
@@ -29,5 +29,18 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+  },
+
+  form: {
+    file: {
+      assetSources: (previousAssetSources: AssetSource[]) => {
+        return previousAssetSources.filter((assetSource) => assetSource !== mediaAssetSource)
+      },
+    },
+    image: {
+      assetSources: (previousAssetSources: AssetSource[]) => {
+        return previousAssetSources.filter((assetSource) => assetSource === mediaAssetSource)
+      },
+    },
   },
 })

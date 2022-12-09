@@ -41,6 +41,33 @@ export default defineType({
       options: { source: 'name' },
       // @ts-ignore - TODO - fix this TS error
       validation: validateSlug,
+      group: 'content',
+    }),
+
+    defineField({
+      name: 'gallery',
+      title: 'Gallery (ILL MAKE IT BULK UPLOAD LATER <3)',
+      type: 'array',
+      initialValue: [],
+      of: [
+        {
+          type: 'image',
+          options: {
+            hotspot: true, // <-- Defaults to false
+          },
+          fields: [
+            {
+              name: 'caption',
+              type: 'string',
+              title: 'Caption',
+              options: {
+                isHighlighted: true, // <-- make this field easily accessible
+              },
+            },
+          ],
+        },
+      ],
+      group: 'content',
     }),
 
     // Modules
