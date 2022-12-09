@@ -17,13 +17,13 @@
     "watch": "tamagui-build --watch"
   },
   "dependencies": {
-    "@tamagui/animations-reanimated": "^1.0.1-rc.0.3",
-    "@tamagui/font-inter": "^1.0.1-rc.0.3",
-    "@tamagui/shorthands": "^1.0.1-rc.0.3",
-    "@tamagui/theme-base": "^1.0.1-rc.0.3",
-    "tamagui": "^1.0.1-rc.0.3"
+    "@tamagui/animations-reanimated": "^1.0.1-rc.1.1",
+    "@tamagui/font-inter": "^1.0.1-rc.1.1",
+    "@tamagui/shorthands": "^1.0.1-rc.1.1",
+    "@tamagui/theme-base": "^1.0.1-rc.1.1",
+    "tamagui": "^1.0.1-rc.1.1"
   },
   "devDependencies": {
-    "@tamagui/build": "^1.0.1-rc.0.3"
+    "@tamagui/build": "^1.0.1-rc.1.1"
   }
 }

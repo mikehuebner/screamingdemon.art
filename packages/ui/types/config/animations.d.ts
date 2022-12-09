@@ -1,19 +1,19 @@
 export declare const animations: import("@tamagui/core").AnimationDriver<{
-    bouncy: {
-        type: string;
+    fast: {
+        type: "spring";
         damping: number;
         mass: number;
         stiffness: number;
     };
-    lazy: {
-        type: string;
-        damping: number;
-        stiffness: number;
-    };
-    quick: {
-        type: string;
+    medium: {
+        type: "spring";
         damping: number;
         mass: number;
+        stiffness: number;
+    };
+    slow: {
+        type: "spring";
+        damping: number;
         stiffness: number;
     };
 }>;

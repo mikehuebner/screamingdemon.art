@@ -88,6 +88,7 @@ const plugins = [
     'expo-constants',
     'expo-modules-core',
     'react-native-reanimated',
+    'react-native-gesture-handler',
     'react-native-reanimated-carousel',
     '@screamingdemonart/ui',
   ]),
