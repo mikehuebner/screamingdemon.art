@@ -7,10 +7,10 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "turbo run dev --parallel",
-    "build": "turbo run build",
-    "build:web": "turbo run build --filter=web",
-    "build:sanity": "turbo run build --filter=sanity",
+    "dev": "NODE_OPTIONS='--openssl-legacy-provider' turbo run dev --parallel",
+    "build": "NODE_OPTIONS='--openssl-legacy-provider' turbo run build",
+    "build:web": "NODE_OPTIONS='--openssl-legacy-provider' turbo run build --filter=web",
+    "build:sanity": "NODE_OPTIONS='--openssl-legacy-provider' turbo run build --filter=sanity",
     "lint": "run-p lint:*",
     "lint:eslint": "turbo run lint --continue",
     "lint:types": "tsc --build",
