@@ -20,7 +20,7 @@
     "@trpc/next": "^10.4.3",
     "@trpc/react-query": "^10.4.3",
     "@trpc/server": "^10.4.3",
-    "expo": "^47.0.8",
+    "critters": "^0.0.16",
     "groq": "^2.33.2",
     "next": "^13.0.4",
     "next-sanity": "^3.1.2",
@@ -52,7 +52,6 @@
     "@types/node": "^18.6.4",
     "eslint": "^8.29.0",
     "eslint-config-next": "^12.2.4",
-    "next-compose-plugins": "^2.2.1",
     "next-images": "^1.8.4",
     "next-transpile-modules": "^10.0.0"
   }

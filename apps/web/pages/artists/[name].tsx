@@ -29,6 +29,7 @@ const DisplayImage = ({ image }: ImageGalleryProps) => {
       placeholder="blur"
       blurDataURL={image.asset.metadata.lqip}
       alt="Testing will do"
+      draggable={false}
     />
   )
 }
@@ -47,7 +48,7 @@ const Gallery = ({ images }: { images: ImageSource[] }) => {
         scrollAnimationDuration={1000}
         onSnapToItem={(index) => console.log('current index:', index)}
         renderItem={({ index }) => (
-          <Stack flex={1}>
+          <Stack flex={1} userSelect="none">
             <DisplayImage image={images[index]} />
           </Stack>
         )}

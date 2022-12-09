@@ -16,7 +16,7 @@
     "lint:types": "tsc --build",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "upgrade": "manypkg upgrade tamagui && manypkg upgrade @tamagui && manypkg upgrade tamagui-loader",
-    "clean": "rimraf {packages,apps}/**/{.next,dist,build,.turbo} node_modules",
+    "clean": "rimraf {packages,apps}/**/{.next,dist,build,.turbo,.expo,.tamagui,.sanity} node_modules",
     "pretty": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "dependencies": {
