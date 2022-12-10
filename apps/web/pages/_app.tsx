@@ -10,18 +10,19 @@ import { useMemo } from 'react'
 
 import { Provider } from '@screamingdemonart/app/provider'
 import { NextThemeProvider, useRootTheme } from '@tamagui/next-theme'
-import { Stack, useWindowDimensions } from '@screamingdemonart/ui'
+import { AnimatePresence, Stack } from '@screamingdemonart/ui'
 import Head from 'next/head'
-
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 import { trpc } from '~/utils'
 
 import type { SolitoAppProps } from 'solito'
+import { useRouter } from 'next/router'
 
 function App({ Component, pageProps }: SolitoAppProps) {
-  const { width } = useWindowDimensions()
   const [theme, setTheme] = useRootTheme()
+  const { asPath } = useRouter()
+
+  console.log({ asPath })
 
   const contents = useMemo(() => {
     // @ts-ignore
@@ -41,15 +42,13 @@ function App({ Component, pageProps }: SolitoAppProps) {
         <link href="/favicon-light.svg" rel="icon" media="(prefers-color-scheme: light)" />
         <link href="/favicon-dark.svg" rel="icon" media="(prefers-color-scheme: dark)" />
       </Head>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <NextThemeProvider onChangeTheme={setTheme}>
-          <Provider disableRootThemeClass defaultTheme={theme}>
-            <Stack w={width} h="100%" alignSelf="center">
-              {contents}
-            </Stack>
-          </Provider>
-        </NextThemeProvider>
-      </GestureHandlerRootView>
+      <NextThemeProvider onChangeTheme={setTheme}>
+        <Provider disableRootThemeClass defaultTheme={theme}>
+          <AnimatePresence enterVariant="fromLeft" exitVariant="fromRight" exitBeforeEnter>
+            {contents}
+          </AnimatePresence>
+        </Provider>
+      </NextThemeProvider>
     </>
   )
 }

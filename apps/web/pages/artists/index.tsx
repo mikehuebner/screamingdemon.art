@@ -5,7 +5,7 @@ import { useLink } from 'solito/link'
 import { createSSG, type Artist } from '~/server'
 import { trpc } from '~/utils'
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const ssg = await createSSG()
 
   await ssg.artists.list.prefetch()

@@ -1,7 +1,7 @@
 import Masonry from 'react-masonry-css'
 import Carousel from 'react-native-reanimated-carousel'
 
-import { GetServerSidePropsContext } from 'next'
+import { GetServerSidePropsContext, InferGetStaticPropsType } from 'next'
 import { groq } from 'next-sanity'
 import { useNextSanityImage } from 'next-sanity-image'
 
@@ -57,11 +57,36 @@ const Gallery = ({ images }: { images: ImageSource[] }) => {
   )
 }
 
-type ArtistPageProps = {
-  name: string
+export async function getStaticPaths() {
+  // When this is true (in preview environments) don't
+  // prerender any static pages
+  // (faster builds, but slower initial page load)
+  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+    return {
+      paths: [],
+      fallback: 'blocking',
+    }
+  }
+
+  const ssg = await createSSG()
+
+  const artists = await ssg.artists.list.fetch()
+
+  // Get the paths we want to prerender based on posts
+  // In production environments, prerender all pages
+  // (slower builds, but faster initial page load)
+  const paths = artists.map(({ slug }) => ({
+    params: { name: slug },
+  }))
+
+  return { paths, fallback: 'blocking' }
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext<ArtistPageProps>) {
+export async function getStaticProps(
+  context: GetServerSidePropsContext<{
+    name: string
+  }>
+) {
   const ssg = await createSSG()
 
   const name = context.params?.name as string
@@ -75,10 +100,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext<Arti
       trpcState: ssg.dehydrate(),
       name,
     },
+    revalidate: 1,
   }
 }
 
-export default function ArtistDetailsScreen({ name }: ArtistPageProps) {
+export default function ArtistDetailsScreen({
+  name,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const linkProps = useLink({ href: '/' })
   const { data: artistData } = trpc.artists.get.useQuery({
     id: name,
