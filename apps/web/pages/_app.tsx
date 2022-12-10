@@ -6,13 +6,14 @@ import '@tamagui/core/reset.css'
 import '@tamagui/font-inter/css/400.css'
 import '@tamagui/font-inter/css/700.css'
 
-import { useMemo } from 'react'
+import { Suspense, useMemo } from 'react'
 
 import { Provider } from '@screamingdemonart/app/provider'
 import { NextThemeProvider, useRootTheme } from '@tamagui/next-theme'
 import { AnimatePresence, Stack } from '@screamingdemonart/ui'
 import Head from 'next/head'
 
+import { Header } from '~/components/header'
 import { trpc } from '~/utils'
 
 import type { SolitoAppProps } from 'solito'
@@ -23,7 +24,6 @@ function App({ Component, pageProps }: SolitoAppProps) {
   const { asPath } = useRouter()
 
   console.log({ asPath })
-
   const contents = useMemo(() => {
     // @ts-ignore
     return <Component {...pageProps} />
@@ -44,8 +44,9 @@ function App({ Component, pageProps }: SolitoAppProps) {
       </Head>
       <NextThemeProvider onChangeTheme={setTheme}>
         <Provider disableRootThemeClass defaultTheme={theme}>
+          <Header />
           <AnimatePresence enterVariant="fromLeft" exitVariant="fromRight" exitBeforeEnter>
-            {contents}
+            <Suspense fallback={null}>{contents}</Suspense>
           </AnimatePresence>
         </Provider>
       </NextThemeProvider>

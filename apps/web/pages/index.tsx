@@ -9,7 +9,7 @@ export default function HomeScreen() {
   })
 
   return (
-    <Stack>
+    <Stack h="100vh">
       <YStack f={1} jc="center" ai="center" p="$4" space>
         <YStack space="$4" maw={600}>
           <HeadLogo fill="lightgrey" />
