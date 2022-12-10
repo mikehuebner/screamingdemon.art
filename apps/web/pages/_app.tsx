@@ -10,23 +10,22 @@ import { Suspense, useMemo } from 'react'
 
 import { Provider } from '@screamingdemonart/app/provider'
 import { NextThemeProvider, useRootTheme } from '@tamagui/next-theme'
-import { AnimatePresence, Stack } from '@screamingdemonart/ui'
 import Head from 'next/head'
 
-import { Header } from '~/components/header'
 import { trpc } from '~/utils'
 
 import type { SolitoAppProps } from 'solito'
-import { useRouter } from 'next/router'
+import { Layout } from '~/components/layout'
 
 function App({ Component, pageProps }: SolitoAppProps) {
   const [theme, setTheme] = useRootTheme()
-  const { asPath } = useRouter()
-
-  console.log({ asPath })
   const contents = useMemo(() => {
     // @ts-ignore
-    return <Component {...pageProps} />
+    return (
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    )
   }, [Component, pageProps])
 
   return (
@@ -44,10 +43,7 @@ function App({ Component, pageProps }: SolitoAppProps) {
       </Head>
       <NextThemeProvider onChangeTheme={setTheme}>
         <Provider disableRootThemeClass defaultTheme={theme}>
-          <Header />
-          <AnimatePresence enterVariant="fromLeft" exitVariant="fromRight" exitBeforeEnter>
-            <Suspense fallback={null}>{contents}</Suspense>
-          </AnimatePresence>
+          <Suspense fallback={null}>{contents}</Suspense>
         </Provider>
       </NextThemeProvider>
     </>

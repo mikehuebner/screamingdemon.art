@@ -1,6 +1,3 @@
-/**
- * Desk structure overrides
- */
 import { ListItemBuilder, StructureResolver } from 'sanity/desk'
 
 import artists from './artistsStructure'

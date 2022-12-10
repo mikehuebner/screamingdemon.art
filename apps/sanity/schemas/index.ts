@@ -40,6 +40,16 @@ import shopifyCollection from './objects/shopifyCollection'
 import shopifyCollectionRule from './objects/shopifyCollectionRule'
 import shopifyProduct from './objects/shopifyProduct'
 import shopifyProductVariant from './objects/shopifyProductVariant'
+import socialEtsy from './objects/social/etsy'
+import socialFacebook from './objects/social/facebook'
+import socialInstagram from './objects/social/instagram'
+import socialPinterest from './objects/social/pinterest'
+import socialShopify from './objects/social/shopify'
+import socialSoundcloud from './objects/social/soundcloud'
+import socialSpotify from './objects/social/spotify'
+import socialTiktok from './objects/social/tiktok'
+import socialTwitter from './objects/social/twitter'
+import socialYouTube from './objects/social/youtube'
 import home from './singletons/home'
 import settings from './singletons/settings'
 
@@ -132,6 +142,17 @@ const objects = [
   /**
    * @screamingdemonart
    */
+
+  socialEtsy,
+  socialFacebook,
+  socialInstagram,
+  socialPinterest,
+  socialShopify,
+  socialSoundcloud,
+  socialSpotify,
+  socialTiktok,
+  socialTwitter,
+  socialYouTube,
 ]
 
 export const schemaTypes = [...annotations, ...documents, ...singletons, ...objects, ...blocks]

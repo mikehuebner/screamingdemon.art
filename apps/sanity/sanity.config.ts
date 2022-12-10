@@ -2,6 +2,7 @@ import { colorInput } from '@sanity/color-input'
 import { visionTool } from '@sanity/vision'
 import { AssetSource, defineConfig, isDev } from 'sanity'
 import { imageHotspotArrayPlugin } from 'sanity-plugin-hotspot-array'
+import { markdownSchema } from 'sanity-plugin-markdown'
 import { media, mediaAssetSource } from 'sanity-plugin-media'
 import { deskTool } from 'sanity/desk'
 
@@ -24,6 +25,7 @@ export default defineConfig({
     imageHotspotArrayPlugin(),
     customDocumentActions(),
     media(),
+    markdownSchema(),
     ...(isDev ? devOnlyPlugins : []),
   ],
 

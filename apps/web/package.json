@@ -44,6 +44,7 @@
   },
   "devDependencies": {
     "@expo/next-adapter": "^4.0.13",
+    "@sanity/types": "^3.0.6",
     "@screamingdemonart/eslint-config-screamingdemonart": "*",
     "@screamingdemonart/sanity": "*",
     "@svgr/webpack": "^6.5.1",
