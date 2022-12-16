@@ -8,5 +8,5 @@
       "@screamingdemonart/config/*": ["./packages/config/*"]
     }
   },
-  "extends": "./packages/tsconfig/react-library.json"
+  "extends": "./tsconfig.base"
 }

@@ -2,6 +2,8 @@ import { ListItemBuilder, StructureResolver } from 'sanity/desk'
 
 import artists from './artistsStructure'
 import collections from './collectionStructure'
+import eventType from './eventTypeStructure'
+import events from './eventsStructure'
 import featuredArtists from './featuredArtistsStructure'
 import home from './homeStructure'
 import products from './productStructure'
@@ -29,6 +31,8 @@ const hiddenDocTypes = (listItem: ListItemBuilder) => {
   }
 
   return ![
+    'events',
+    'eventType',
     'artists',
     'featuredArtists',
     'collection',
@@ -52,6 +56,11 @@ export const structure: StructureResolver = (S, context) =>
 
       artists(S, context),
       featuredArtists(S, context),
+
+      S.divider(),
+
+      events(S, context),
+      eventType(S, context),
 
       S.divider(),
 

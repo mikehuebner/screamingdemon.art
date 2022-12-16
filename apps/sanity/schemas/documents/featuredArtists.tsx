@@ -25,8 +25,8 @@ export default defineField({
   groups: [
     {
       default: true,
-      name: 'editorial',
-      title: 'Editorial',
+      name: 'details',
+      title: 'Details',
     },
     {
       name: 'seo',
@@ -88,21 +88,6 @@ export default defineField({
       name: 'bio',
       title: 'Bio',
       type: 'text',
-      group: 'editorial',
-    }),
-
-    defineField({
-      name: 'modules',
-      title: 'Modules',
-      type: 'array',
-      of: [
-        { type: 'module.callout' },
-        { type: 'module.callToAction' },
-        { type: 'module.collection' },
-        { type: 'module.image' },
-        { type: 'module.instagram' },
-        { type: 'module.product' },
-      ],
       group: 'editorial',
     }),
 

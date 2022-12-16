@@ -1,34 +1,33 @@
-import { HeartFilledIcon } from '@sanity/icons'
+import { FaPaintBrush } from 'react-icons/fa'
+
 import { defineField, defineType } from 'sanity'
 
 import { validateSlug } from '../../utils/validateSlug'
-
-const GROUPS = [
-  {
-    default: true,
-    name: 'details',
-    title: 'Details',
-  },
-  {
-    name: 'social',
-    title: 'Social',
-  },
-  {
-    name: 'gallery',
-    title: 'Gallery',
-  },
-  {
-    name: 'seo',
-    title: 'SEO',
-  },
-]
 
 export default defineType({
   name: 'artists',
   title: 'Artists',
   type: 'document',
-  icon: HeartFilledIcon,
-  groups: GROUPS,
+  icon: FaPaintBrush,
+  groups: [
+    {
+      default: true,
+      name: 'details',
+      title: 'Details',
+    },
+    {
+      name: 'social',
+      title: 'Social',
+    },
+    {
+      name: 'gallery',
+      title: 'Gallery',
+    },
+    {
+      name: 'seo',
+      title: 'SEO',
+    },
+  ],
   fields: [
     defineField({
       name: 'name',

@@ -40,9 +40,9 @@ const nextConfig = {
     scrollRestoration: true,
     legacyBrowsers: false,
     optimizeCss: true,
-    browsersListForSwc: true,
+    // browsersListForSwc: true,
     forceSwcTransforms: true,
-    // concurrentFeatures: true,
+    fontLoaders: [{ loader: '@next/font/google' }],
     // nextScriptWorkers: true,
     // Dunno if we actually need this, it's like 4mb
     // swcPlugins: [[require.resolve('./plugins/swc_plugin_reanimated.wasm')]],

@@ -1,9 +1,14 @@
 import { Children } from 'react'
 import { AppRegistry } from 'react-native'
 
+import { Nunito_Sans } from '@next/font/google'
 import NextDocument, { Head, Html, Main, NextScript } from 'next/document'
 
 import Tamagui from '../tamagui.config'
+
+const NunitoSans = Nunito_Sans({
+  weight: ['200', '300', '400', '600', '700', '800', '900'],
+})
 
 export default class Document extends NextDocument {
   static async getInitialProps({ renderPage }: any) {
@@ -27,7 +32,7 @@ export default class Document extends NextDocument {
 
   render() {
     return (
-      <Html>
+      <Html className={NunitoSans.className}>
         <Head>
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         </Head>

@@ -1,11 +1,20 @@
-import { createTamagui } from 'tamagui'
-import { createInterFont } from '@tamagui/font-inter'
+import { createTamagui, createFont } from 'tamagui'
 import { shorthands } from '@tamagui/shorthands'
 import { themes, tokens } from '@tamagui/theme-base'
 
 import { animations } from './animations'
 
-const headingFont = createInterFont({
+const headingFont = createFont({
+  family: 'Nunito Sans',
+  face: {
+    200: { normal: 'NunitoSans-Light', italic: 'NunitoSans-LightItalic' },
+    300: { normal: 'NunitoSans-Light', italic: 'NunitoSans-LightItalic' },
+    400: { normal: 'NunitoSans-Regular', italic: 'NunitoSans-Italic' },
+    600: { normal: 'NunitoSans-SemiBold', italic: 'NunitoSans-SemiBoldItalic' },
+    700: { normal: 'NunitoSans-Bold', italic: 'NunitoSans-BoldItalic' },
+    800: { normal: 'NunitoSans-ExtraBold', italic: 'NunitoSans-ExtraBoldItalic' },
+    900: { normal: 'NunitoSans-Black', italic: 'NunitoSans-BlackItalic' },
+  },
   size: {
     6: 15,
   },
@@ -32,22 +41,42 @@ const headingFont = createInterFont({
     14: -5,
     15: -6,
   },
-  face: {
-    700: { normal: 'InterBold' },
-  },
+  lineHeight: {},
 })
 
-const bodyFont = createInterFont(
-  {
-    face: {
-      700: { normal: 'InterBold' },
-    },
+const bodyFont = createFont({
+  family: 'Nunito Sans',
+  face: {
+    600: { normal: 'NunitoSans-SemiBold', italic: 'NunitoSans-SemiBoldItalic' },
   },
-  {
-    sizeSize: (size) => Math.round(size * 1.1),
-    sizeLineHeight: (size) => Math.round(size * 1.1 + (size > 20 ? 10 : 10)),
-  }
-)
+  size: {
+    6: 15,
+  },
+  transform: {
+    6: 'uppercase',
+    7: 'none',
+  },
+  weight: {
+    6: '400',
+    7: '700',
+  },
+  color: {
+    6: '$colorFocus',
+    7: '$color',
+  },
+  letterSpacing: {
+    5: 2,
+    6: 1,
+    7: 0,
+    8: -1,
+    9: -2,
+    10: -3,
+    12: -4,
+    14: -5,
+    15: -6,
+  },
+  lineHeight: {},
+})
 
 export const config = createTamagui({
   animations,

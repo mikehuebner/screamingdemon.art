@@ -6,12 +6,15 @@ import body from './blocks/body'
 import artists from './documents/artists'
 import collection from './documents/collection'
 import colorTheme from './documents/colorTheme'
+import eventType from './documents/eventType'
+import events from './documents/events'
 import featuredArtists from './documents/featuredArtists'
 import page from './documents/page'
 import product from './documents/product'
 import productVariant from './documents/productVariant'
 import customProductOptionColor from './objects/customProductOption/color'
 import customProductOptionSize from './objects/customProductOption/size'
+import event from './objects/event'
 import heroCollection from './objects/hero/collection'
 import heroHome from './objects/hero/home'
 import heroPage from './objects/hero/page'
@@ -85,6 +88,8 @@ const documents = [
 
   artists,
   featuredArtists,
+  events,
+  eventType,
 ]
 
 const singletons = [
@@ -153,6 +158,8 @@ const objects = [
   socialTiktok,
   socialTwitter,
   socialYouTube,
+
+  event,
 ]
 
 export const schemaTypes = [...annotations, ...documents, ...singletons, ...objects, ...blocks]
