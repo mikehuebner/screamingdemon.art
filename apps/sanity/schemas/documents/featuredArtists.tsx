@@ -35,7 +35,7 @@ export default defineField({
   ],
   fields: [
     defineField({
-      group: 'editorial',
+      group: 'details',
       name: 'artist',
       title: 'Artist',
       description: 'The featured artist for the month',
@@ -52,7 +52,7 @@ export default defineField({
       options: {
         list: months,
       },
-      group: 'editorial',
+      group: 'details',
       validation: (Rule) =>
         Rule.custom(async (currentMonth, context) => {
           const { parent } = context
@@ -81,14 +81,14 @@ export default defineField({
       name: 'tagline',
       title: 'Tagline',
       type: 'string',
-      group: 'editorial',
+      group: 'details',
     }),
 
     defineField({
       name: 'bio',
       title: 'Bio',
       type: 'text',
-      group: 'editorial',
+      group: 'details',
     }),
 
     defineField({

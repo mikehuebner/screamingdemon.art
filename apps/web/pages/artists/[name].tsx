@@ -11,7 +11,6 @@ import Image from 'next/image'
 import { useLink } from 'solito/link'
 
 import { createSanity, createSSG, type ImageSource } from '~/server'
-import '~/styles/react-masonry-styles.css'
 import { trpc } from '~/utils'
 
 interface ImageGalleryProps {
@@ -127,7 +126,7 @@ export default function ArtistDetailsScreen({
 
   return (
     <YStack f={1} jc="center" space>
-      <H1 fow="800">{`${artistData.name}`}</H1>
+      <H1 fow="800">{`${artistData.name} llllllllllllll`}</H1>
       <Paragraph fow="800">{artistData.bio}</Paragraph>
       {artistData.gallery && <Gallery images={artistData.gallery} />}
       <Masonry

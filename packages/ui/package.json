@@ -17,7 +17,9 @@
     "watch": "tamagui-build --watch"
   },
   "dependencies": {
+    "@next/font": "^13.0.7",
     "@tamagui/animations-reanimated": "^1.0.1-rc.2",
+    "@tamagui/config-base": "^1.0.1-rc.2",
     "@tamagui/font-inter": "^1.0.1-rc.2",
     "@tamagui/shorthands": "^1.0.1-rc.2",
     "@tamagui/theme-base": "^1.0.1-rc.2",

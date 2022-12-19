@@ -47,7 +47,7 @@ HeadAnchor.displayName = 'HeadAnchor'
 
 export const HeaderLinks = ({ forceShowAllLinks }: any) => (
   <>
-    <NextLink legacyBehavior prefetch={false} href="/docs/intro/installation" passHref>
+    <NextLink legacyBehavior prefetch={false} href="/artists" passHref>
       <HeadAnchor
         $sm={{
           display: forceShowAllLinks ? 'flex' : 'none',
@@ -57,7 +57,7 @@ export const HeaderLinks = ({ forceShowAllLinks }: any) => (
       </HeadAnchor>
     </NextLink>
 
-    <NextLink legacyBehavior prefetch={false} href="/blog" passHref>
+    <NextLink legacyBehavior prefetch={false} href="/events" passHref>
       <HeadAnchor
         $md={{
           display: forceShowAllLinks ? 'flex' : 'none',
@@ -67,7 +67,27 @@ export const HeaderLinks = ({ forceShowAllLinks }: any) => (
       </HeadAnchor>
     </NextLink>
 
-    <NextLink legacyBehavior prefetch={false} href="/community" passHref>
+    <NextLink legacyBehavior prefetch={false} href="/store" passHref>
+      <HeadAnchor
+        $md={{
+          display: forceShowAllLinks ? 'flex' : 'none',
+        }}
+      >
+        Store
+      </HeadAnchor>
+    </NextLink>
+
+    <NextLink legacyBehavior prefetch={false} href="/about" passHref>
+      <HeadAnchor
+        $md={{
+          display: forceShowAllLinks ? 'flex' : 'none',
+        }}
+      >
+        About
+      </HeadAnchor>
+    </NextLink>
+
+    <NextLink legacyBehavior prefetch={false} href="/contact" passHref>
       <HeadAnchor
         $md={{
           display: forceShowAllLinks ? 'flex' : 'none',
@@ -119,39 +139,21 @@ export const Header = (props: any) => {
           // okay...
           zi={50000}
         >
-          <XStack ai="center" space="$4">
-            <YStack px="$1" w="$6" h="$6" ai="center" jc="center">
+          <XStack flex={1} ai="center" space="$4">
+            <YStack h="$6" w="$6" jc="center">
               <HeadLogo fill="lightgrey" />
             </YStack>
-          </XStack>
-
-          <AnimatePresence>
-            <XStack
-              position="absolute"
+            <YStack
               $sm={{
                 opacity: 0,
                 pointerEvents: 'none',
               }}
-              zIndex={-1}
+              h="$3"
               jc="center"
-              fullscreen
-              pointerEvents="none"
-              ai="center"
             >
-              <NextLink legacyBehavior href="/" passHref>
-                <XStack
-                  cursor={isHome ? 'default' : 'pointer'}
-                  pointerEvents="auto"
-                  tag="a"
-                  als="center"
-                  w="$20"
-                  h="$3"
-                >
-                  <WordLogo fill="lightgrey" />
-                </XStack>
-              </NextLink>
-            </XStack>
-          </AnimatePresence>
+              <WordLogo fill="lightgrey" width="100%" />
+            </YStack>
+          </XStack>
 
           {/*  prevent layout shift */}
           <XStack jc="flex-end" pointerEvents="auto" tag="nav">

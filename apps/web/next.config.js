@@ -3,7 +3,6 @@ const { join } = require('path')
 const withImages = require('next-images')
 const withTM = require('next-transpile-modules')
 
-const { withExpo } = require('@expo/next-adapter')
 const { withTamagui } = require('@tamagui/next-plugin')
 
 process.env.IGNORE_TS_CONFIG_PATHS = 'true'
@@ -40,10 +39,8 @@ const nextConfig = {
     scrollRestoration: true,
     legacyBrowsers: false,
     optimizeCss: true,
-    // browsersListForSwc: true,
+    esmExternals: true,
     forceSwcTransforms: true,
-    fontLoaders: [{ loader: '@next/font/google' }],
-    // nextScriptWorkers: true,
     // Dunno if we actually need this, it's like 4mb
     // swcPlugins: [[require.resolve('./plugins/swc_plugin_reanimated.wasm')]],
   },
@@ -115,7 +112,6 @@ const plugins = [
       'AnimatedFlatList',
     ],
   }),
-  withExpo,
 ]
 
 module.exports = () => plugins.reduce((acc, next) => next(acc), nextConfig)

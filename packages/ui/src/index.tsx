@@ -4,4 +4,4 @@ export * from './MyComponent'
 /**
  * Configuration for Tamagui
  */
-export { config } from './config'
+export { config, defaultFontConfig } from './config'

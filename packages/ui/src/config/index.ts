@@ -4,79 +4,38 @@ import { themes, tokens } from '@tamagui/theme-base'
 
 import { animations } from './animations'
 
-const headingFont = createFont({
+export const defaultFontConfig = {
   family: 'Nunito Sans',
-  face: {
-    200: { normal: 'NunitoSans-Light', italic: 'NunitoSans-LightItalic' },
-    300: { normal: 'NunitoSans-Light', italic: 'NunitoSans-LightItalic' },
-    400: { normal: 'NunitoSans-Regular', italic: 'NunitoSans-Italic' },
-    600: { normal: 'NunitoSans-SemiBold', italic: 'NunitoSans-SemiBoldItalic' },
-    700: { normal: 'NunitoSans-Bold', italic: 'NunitoSans-BoldItalic' },
-    800: { normal: 'NunitoSans-ExtraBold', italic: 'NunitoSans-ExtraBoldItalic' },
-    900: { normal: 'NunitoSans-Black', italic: 'NunitoSans-BlackItalic' },
+  weight: {
+    200: '200',
+    300: '300',
+    400: '400',
+    600: '600',
+    700: '700',
+    800: '800',
+    900: '900',
   },
   size: {
-    6: 15,
+    1: 11,
+    2: 12,
+    3: 13,
+    4: 14,
+    5: 16,
+    6: 18,
+    7: 20,
+    8: 23,
+    9: 30,
+    10: 46,
+    11: 55,
+    12: 62,
+    13: 72,
+    14: 92,
+    15: 114,
+    16: 134,
   },
-  transform: {
-    6: 'uppercase',
-    7: 'none',
-  },
-  weight: {
-    6: '400',
-    7: '700',
-  },
-  color: {
-    6: '$colorFocus',
-    7: '$color',
-  },
-  letterSpacing: {
-    5: 2,
-    6: 1,
-    7: 0,
-    8: -1,
-    9: -2,
-    10: -3,
-    12: -4,
-    14: -5,
-    15: -6,
-  },
+  letterSpacing: {},
   lineHeight: {},
-})
-
-const bodyFont = createFont({
-  family: 'Nunito Sans',
-  face: {
-    600: { normal: 'NunitoSans-SemiBold', italic: 'NunitoSans-SemiBoldItalic' },
-  },
-  size: {
-    6: 15,
-  },
-  transform: {
-    6: 'uppercase',
-    7: 'none',
-  },
-  weight: {
-    6: '400',
-    7: '700',
-  },
-  color: {
-    6: '$colorFocus',
-    7: '$color',
-  },
-  letterSpacing: {
-    5: 2,
-    6: 1,
-    7: 0,
-    8: -1,
-    9: -2,
-    10: -3,
-    12: -4,
-    14: -5,
-    15: -6,
-  },
-  lineHeight: {},
-})
+} as const
 
 export const config = createTamagui({
   animations,
@@ -84,8 +43,8 @@ export const config = createTamagui({
   themeClassNameOnRoot: true,
   shorthands,
   fonts: {
-    heading: headingFont,
-    body: bodyFont,
+    heading: createFont(defaultFontConfig),
+    body: createFont(defaultFontConfig),
   },
   themes,
   tokens,
