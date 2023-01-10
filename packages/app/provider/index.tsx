@@ -3,6 +3,7 @@ import {
   type TamaguiConfig,
   type TamaguiProviderProps,
 } from '@screamingdemonart/ui'
+import { useMemo } from 'react'
 import config from '../tamagui.config'
 import { NavigationProvider } from './navigation'
 

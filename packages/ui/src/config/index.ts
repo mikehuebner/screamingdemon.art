@@ -1,40 +1,42 @@
-import { createTamagui, createFont } from 'tamagui'
+import { createTamagui, createFont, CreateTamaguiProps } from 'tamagui'
 import { shorthands } from '@tamagui/shorthands'
 import { themes, tokens } from '@tamagui/theme-base'
 
 import { animations } from './animations'
 
-export const defaultFontConfig = {
-  family: 'Nunito Sans',
+const size = {
+  1: 10,
+  2: 11,
+  3: 12,
+  4: 14,
+  5: 15,
+  6: 16,
+  7: 20,
+  8: 22,
+  9: 30,
+  10: 42,
+  11: 52,
+  12: 62,
+  13: 72,
+  14: 92,
+  15: 114,
+  16: 124,
+} as const
+
+const defaultFontConfig = {
+  family: 'var(--nunito-sans)',
   weight: {
-    200: '200',
-    300: '300',
-    400: '400',
-    600: '600',
-    700: '700',
-    800: '800',
-    900: '900',
+    2: '200',
+    3: '300',
+    4: '400',
+    6: '600',
+    7: '700',
+    8: '800',
+    9: '900',
   },
-  size: {
-    1: 11,
-    2: 12,
-    3: 13,
-    4: 14,
-    5: 16,
-    6: 18,
-    7: 20,
-    8: 23,
-    9: 30,
-    10: 46,
-    11: 55,
-    12: 62,
-    13: 72,
-    14: 92,
-    15: 114,
-    16: 134,
-  },
+  size,
   letterSpacing: {},
-  lineHeight: {},
+  lineHeight: Object.fromEntries(Object.entries(size).map(([k, v]) => [k, v * 1.3])) as typeof size,
 } as const
 
 export const config = createTamagui({
@@ -45,6 +47,16 @@ export const config = createTamagui({
   fonts: {
     heading: createFont(defaultFontConfig),
     body: createFont(defaultFontConfig),
+    butcher: createFont({
+      ...defaultFontConfig,
+      family: 'var(--butcher-the-baker)',
+      weight: {
+        4: '400',
+      },
+      letterSpacing: {
+        4: 2,
+      },
+    }),
   },
   themes,
   tokens,

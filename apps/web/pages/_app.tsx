@@ -7,11 +7,12 @@ import '~/styles/react-masonry-styles.css'
 
 import { useMemo } from 'react'
 
-import { Provider } from '@screamingdemonart/app/provider'
+import { Provider as TamaguiProvider } from '@screamingdemonart/app/provider'
 import { NextThemeProvider, useRootTheme } from '@tamagui/next-theme'
 import Head from 'next/head'
 
 import { Nunito_Sans } from '@next/font/google'
+import localFont from '@next/font/local'
 
 import { trpc } from '~/utils'
 
@@ -19,10 +20,13 @@ import type { SolitoAppProps } from 'solito'
 import { Layout } from '~/components/layout'
 
 const NunitoSans = Nunito_Sans({
+  variable: '--nunito-sans',
   weight: ['200', '300', '400', '600', '700', '800', '900'],
   style: ['normal', 'italic'],
   subsets: ['latin'],
 })
+
+const ButcherTheBaker = localFont({ src: '../assets/butcher-the-baker.otf' })
 
 function App({ Component, pageProps }: SolitoAppProps) {
   const [theme, setTheme] = useRootTheme()
@@ -49,10 +53,16 @@ function App({ Component, pageProps }: SolitoAppProps) {
         <link href="/favicon-light.svg" rel="icon" media="(prefers-color-scheme: light)" />
         <link href="/favicon-dark.svg" rel="icon" media="(prefers-color-scheme: dark)" />
       </Head>
+      <style jsx global>{`
+        :root {
+          --nunito-sans: ${NunitoSans.style.fontFamily};
+          --butcher-the-baker: ${ButcherTheBaker.style.fontFamily};
+        }
+      `}</style>
       <NextThemeProvider onChangeTheme={setTheme}>
-        <Provider disableRootThemeClass defaultTheme={theme}>
-          <main className={NunitoSans.className}>{contents}</main>
-        </Provider>
+        <TamaguiProvider disableRootThemeClass defaultTheme={theme}>
+          <main>{contents}</main>
+        </TamaguiProvider>
       </NextThemeProvider>
     </>
   )

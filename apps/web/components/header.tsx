@@ -27,8 +27,8 @@ const HeadAnchor = forwardRef<typeof Paragraph, ParagraphProps>((props, ref) => 
     px="$5"
     py="$2"
     cursor="pointer"
-    size="$3"
     opacity={0.65}
+    animation="fast"
     hoverStyle={{ opacity: 1 }}
     pressStyle={{ opacity: 0.25 }}
     textDecorationLine="none"

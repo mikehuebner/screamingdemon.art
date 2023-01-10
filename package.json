@@ -7,6 +7,7 @@
     "packages/*"
   ],
   "scripts": {
+    "preinstall": "npx -y only-allow yarn",
     "dev": "NODE_OPTIONS='--openssl-legacy-provider' turbo run dev --parallel",
     "build": "NODE_OPTIONS='--openssl-legacy-provider' turbo run build",
     "build:web": "NODE_OPTIONS='--openssl-legacy-provider' turbo run build --filter=web",
