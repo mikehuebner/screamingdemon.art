@@ -71,7 +71,7 @@ export default defineType({
 
     defineField({
       name: 'portrait',
-      title: 'Portiat',
+      title: 'Portrait',
       description:
         'A portrait of the artist. This is optional and will display as a parallax or with the biography. Preferably a square image with a transparent background.',
       type: 'image',

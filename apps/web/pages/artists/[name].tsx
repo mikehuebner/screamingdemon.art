@@ -3,35 +3,14 @@ import Carousel from 'react-native-reanimated-carousel'
 
 import { GetServerSidePropsContext, InferGetStaticPropsType } from 'next'
 import { groq } from 'next-sanity'
-import { useNextSanityImage } from 'next-sanity-image'
 
 import { Button, H1, Paragraph, Stack, useWindowDimensions, YStack } from '@screamingdemonart/ui'
 import { ChevronLeft } from '@tamagui/lucide-icons'
-import Image from 'next/image'
 import { useLink } from 'solito/link'
 
-import { createSanity, createSSG, type ImageSource } from '~/server'
+import { DisplayImage } from '~/components/display-image'
+import { createSSG, type ImageSource } from '~/server'
 import { trpc } from '~/utils'
-
-interface ImageGalleryProps {
-  image: ImageSource
-}
-
-const DisplayImage = ({ image }: ImageGalleryProps) => {
-  const imageProps = useNextSanityImage(createSanity, image ?? null)
-
-  return (
-    <Image
-      {...imageProps}
-      style={{ width: '100%', height: 'auto' }} // layout="responsive" prior to Next 13.0.0
-      sizes="(max-width: 800px) 100vw, 800px"
-      placeholder="blur"
-      blurDataURL={image.asset.metadata.lqip}
-      alt="Testing will do"
-      draggable={false}
-    />
-  )
-}
 
 const Gallery = ({ images }: { images: ImageSource[] }) => {
   const { width } = useWindowDimensions()
@@ -45,7 +24,6 @@ const Gallery = ({ images }: { images: ImageSource[] }) => {
         autoPlayInterval={5000}
         data={images}
         scrollAnimationDuration={1000}
-        onSnapToItem={(index) => console.log('current index:', index)}
         renderItem={({ index }) => (
           <Stack flex={1} userSelect="none">
             <DisplayImage image={images[index]} />
@@ -126,7 +104,7 @@ export default function ArtistDetailsScreen({
 
   return (
     <YStack f={1} jc="center" space>
-      <H1 fow="800">{`${artistData.name} llllllllllllll`}</H1>
+      <H1 fow="800">{`${artistData.name}`}</H1>
       <Paragraph fow="800">{artistData.bio}</Paragraph>
       {artistData.gallery && <Gallery images={artistData.gallery} />}
       <Masonry

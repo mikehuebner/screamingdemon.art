@@ -20,6 +20,7 @@ export type Artist = {
   _id: string
   name: string
   bio?: string
+  portrait?: ImageSource
   slug: string
   gallery: ImageSource[] | null
 }
@@ -41,7 +42,15 @@ export const artistsRouter = router({
         *[${baseArtistsQuery}] {
           name,
           _id,
-          'slug': slug.current
+          'slug': slug.current,
+          bio,
+          portrait,
+           gallery {
+            asset->{
+              ...,
+              metadata
+            }
+          }[0..8],
           ${input}
         }
       `

@@ -54,7 +54,7 @@ export const config = createTamagui({
         4: '400',
       },
       letterSpacing: {
-        4: 2,
+        4: 6,
       },
     }),
   },
