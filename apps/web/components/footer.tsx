@@ -1,7 +1,9 @@
+import { Children } from 'react'
+
 import { FiGithub, FiTwitter, FiInstagram } from 'react-icons/fi'
 
-import { H4, Paragraph, styled, Text, XStack, YStack } from '@screamingdemonart/ui'
-import Link from 'next/link'
+import { H4, Paragraph, styled, Text, TextProps, XStack, YStack } from '@screamingdemonart/ui'
+import NextLink, { LinkProps as NextLinkProps } from 'next/link'
 
 import { WordLogo } from './logo'
 
@@ -27,6 +29,41 @@ export const ContainerLarge = styled(YStack, {
     },
   },
 })
+
+export type LinkProps = Omit<NextLinkProps, 'passHref' | 'as'> &
+  TextProps & {
+    target?: any
+    rel?: any
+    title?: any
+  }
+
+export const ParagraphLink = ({
+  href = '',
+  replace,
+  scroll,
+  shallow,
+  prefetch,
+  locale,
+  children,
+  ...props
+}: LinkProps) => {
+  const allChildrenStrings = Children.toArray(children).every((x) => typeof x === 'string')
+
+  return (
+    <NextLink {...{ href, replace, scroll, shallow, prefetch, locale }}>
+      <Paragraph
+        className="paragraph-link"
+        cursor="pointer"
+        tag="span"
+        color="$color"
+        hoverStyle={{ color: '$color' }}
+        {...props}
+      >
+        {allChildrenStrings ? children : children}
+      </Paragraph>
+    </NextLink>
+  )
+}
 
 export const Footer = () => {
   return (
@@ -54,9 +91,9 @@ export const Footer = () => {
             >
               homepage
             </Text>
-            <Link href="/" passHref>
+            <NextLink href="/" passHref>
               <WordLogo fill="white" width="100%" />
-            </Link>
+            </NextLink>
             <Paragraph mt="$2" size="$3">
               by Mike Huebner
             </Paragraph>
@@ -67,19 +104,19 @@ export const Footer = () => {
             <H4 mb="$3" size="$6">
               Overview
             </H4>
-            <Paragraph href="/store">Store</Paragraph>
-            <Paragraph href="/events">Events</Paragraph>
-            <Paragraph href="/contact">Contact</Paragraph>
-            {/* <Paragraph href="/docs/api">API</Paragraph>
-          <Paragraph href="/docs/frequently-asked-questions">FAQ</Paragraph> */}
+            <ParagraphLink href="/store">Store</ParagraphLink>
+            <ParagraphLink href="/events">Events</ParagraphLink>
+            <ParagraphLink href="/contact">Contact</ParagraphLink>
+            {/* <ParagraphLink href="/docs/api">API</ParagraphLink>
+          <ParagraphLink href="/docs/frequently-asked-questions">FAQ</ParagraphLink> */}
           </YStack>
 
           <YStack ai="flex-start" $sm={{ ai: 'center' }} px="$4" py="$5" flex={1.5} space="$3">
             <H4 mb="$3" size="$6">
               Artists
             </H4>
-            <Paragraph href="/artists/featured">Featured</Paragraph>
-            <Paragraph href="/artists/resident">Resident</Paragraph>
+            <ParagraphLink href="/artists/featured">Featured</ParagraphLink>
+            <ParagraphLink href="/artists/resident">Resident</ParagraphLink>
           </YStack>
 
           <YStack ai="flex-start" $sm={{ ai: 'center' }} px="$4" py="$5" flex={1.5} space="$3">
@@ -88,21 +125,21 @@ export const Footer = () => {
             </H4>
             <XStack space="$2" ai="center">
               <FiGithub />
-              <Paragraph href="https://github.com/tamagui/tamagui" target="_blank">
+              <ParagraphLink href="https://github.com/tamagui/tamagui" target="_blank">
                 GitHub
-              </Paragraph>
+              </ParagraphLink>
             </XStack>
             <XStack space="$2" ai="center">
               <FiTwitter />
-              <Paragraph href="https://twitter.com/tamagui_js" target="_blank">
+              <ParagraphLink href="https://twitter.com/tamagui_js" target="_blank">
                 Twitter
-              </Paragraph>
+              </ParagraphLink>
             </XStack>
             <XStack space="$2" ai="center">
               <FiInstagram />
-              <Paragraph href="https://discord.gg/4qh6tdcVDa" target="_blank">
+              <ParagraphLink href="https://discord.gg/4qh6tdcVDa" target="_blank">
                 Instagram
-              </Paragraph>
+              </ParagraphLink>
             </XStack>
           </YStack>
         </XStack>

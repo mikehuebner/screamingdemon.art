@@ -1,20 +1,17 @@
 import { forwardRef, useCallback, useState } from 'react'
+import { LayoutChangeEvent } from 'react-native'
+
+import { CgMenuMotion } from 'react-icons/cg'
 
 import {
   Button,
   Paragraph,
   ParagraphProps,
-  Popover,
-  Separator,
-  Text,
-  VisuallyHidden,
+  Sheet,
+  Stack,
   XStack,
   YStack,
-  useMedia,
-  AnimatePresence,
 } from '@screamingdemonart/ui'
-import { Menu } from '@tamagui/lucide-icons'
-import { LayoutChangeEvent } from '@tamagui/types-react-native'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -45,64 +42,68 @@ const HeadAnchor = forwardRef<typeof Paragraph, ParagraphProps>((props, ref) => 
 
 HeadAnchor.displayName = 'HeadAnchor'
 
-export const HeaderLinks = ({ forceShowAllLinks }: any) => (
+export const HeaderLinks = () => (
   <>
     <NextLink legacyBehavior prefetch={false} href="/artists" passHref>
-      <HeadAnchor
-        $sm={{
-          display: forceShowAllLinks ? 'flex' : 'none',
-        }}
-      >
-        Artists
-      </HeadAnchor>
+      <HeadAnchor>Artists</HeadAnchor>
     </NextLink>
 
     <NextLink legacyBehavior prefetch={false} href="/events" passHref>
-      <HeadAnchor
-        $md={{
-          display: forceShowAllLinks ? 'flex' : 'none',
-        }}
-      >
-        Events
-      </HeadAnchor>
+      <HeadAnchor>Events</HeadAnchor>
     </NextLink>
 
     <NextLink legacyBehavior prefetch={false} href="/store" passHref>
-      <HeadAnchor
-        $md={{
-          display: forceShowAllLinks ? 'flex' : 'none',
-        }}
-      >
-        Store
-      </HeadAnchor>
+      <HeadAnchor>Store</HeadAnchor>
     </NextLink>
 
     <NextLink legacyBehavior prefetch={false} href="/about" passHref>
-      <HeadAnchor
-        $md={{
-          display: forceShowAllLinks ? 'flex' : 'none',
-        }}
-      >
-        About
-      </HeadAnchor>
+      <HeadAnchor>About</HeadAnchor>
     </NextLink>
 
     <NextLink legacyBehavior prefetch={false} href="/contact" passHref>
-      <HeadAnchor
-        $md={{
-          display: forceShowAllLinks ? 'flex' : 'none',
-        }}
-      >
-        Contact
-      </HeadAnchor>
+      <HeadAnchor>Contact</HeadAnchor>
     </NextLink>
   </>
 )
 
+const Menu = () => {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <>
+      <Button
+        onPress={() => setOpen(true)}
+        bg="$backgroundTransparent"
+        px="$2"
+        scaleIcon={2}
+        icon={<CgMenuMotion />}
+        $gtMd={{
+          display: 'none',
+        }}
+      />
+      <Sheet
+        modal
+        open={open}
+        onOpenChange={setOpen}
+        snapPoints={[85, 50, 25]}
+        dismissOnSnapToBottom
+        zIndex={100_000}
+      >
+        <Sheet.Overlay />
+        <Sheet.Frame>
+          <Sheet.Handle />
+          <Stack ai="center" jc="center" h="100%" w="100%" bg="$background">
+            <HeaderLinks />
+          </Stack>
+        </Sheet.Frame>
+      </Sheet>
+    </>
+  )
+}
+
 export const Header = (props: any) => {
   const [headerHeight, setHeaderHeight] = useState(54)
   const router = useRouter()
-  const isHome = router.pathname === '/'
 
   const handleOnLayout = useCallback((event: LayoutChangeEvent) => {
     const { height } = event.nativeEvent.layout
@@ -140,9 +141,12 @@ export const Header = (props: any) => {
           zi={50000}
         >
           <XStack flex={1} ai="center" space="$4">
-            <YStack h="$6" w="$6" jc="center">
-              <HeadLogo fill="lightgrey" />
-            </YStack>
+            <Menu />
+            <NextLink href="/" passHref>
+              <YStack h="$6" w="$6" jc="center">
+                <HeadLogo fill="lightgrey" />
+              </YStack>
+            </NextLink>
             <YStack
               $sm={{
                 opacity: 0,
@@ -157,42 +161,16 @@ export const Header = (props: any) => {
 
           {/*  prevent layout shift */}
           <XStack jc="flex-end" pointerEvents="auto" tag="nav">
-            <XStack ai="center" space="$3">
+            <XStack
+              ai="center"
+              space="$3"
+              display="none"
+              $gtMd={{
+                display: 'flex',
+              }}
+            >
               <HeaderLinks {...props} />
-
-              {/* <SearchButton size="$2" br="$10" elevation="$4" /> */}
-
-              {/* <SmallMenu /> */}
             </XStack>
-            {/* {isInSubApp ? (
-          <XStack ai="center" space="$2">
-            <NextLink legacyBehavior href="/signin" passHref>
-              <Paragraph
-                fontFamily="$silkscreen"
-                px="$3"
-                py="$2"
-                cursor="pointer"
-                size="$3"
-                o={0.7}
-                hoverStyle={{ opacity: 1 }}
-                tag="a"
-                $xxs={{
-                  display: 'none',
-                }}
-              >
-                Login
-              </Paragraph>
-            </NextLink>
-
-            <NextLink legacyBehavior href="/takeout/purchase" passHref>
-              <Button fontFamily="$silkscreen" size="$3" tag="a">
-                Purchase
-              </Button>
-            </NextLink>
-          </XStack>
-        ) : (
-          
-        )} */}
           </XStack>
         </XStack>
       </XStack>

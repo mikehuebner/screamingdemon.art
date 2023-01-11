@@ -50,7 +50,7 @@ export const artistsRouter = router({
               ...,
               metadata
             }
-          }[0..8],
+          }[],
           ${input}
         }
       `
