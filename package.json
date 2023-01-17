@@ -2,43 +2,41 @@
   "name": "screamingdemon.art",
   "version": "0.0.0",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
-    "preinstall": "npx -y only-allow yarn",
-    "dev": "NODE_OPTIONS='--openssl-legacy-provider' turbo run dev --parallel",
-    "build": "NODE_OPTIONS='--openssl-legacy-provider' turbo run build",
-    "build:web": "NODE_OPTIONS='--openssl-legacy-provider' turbo run build --filter=web",
-    "build:sanity": "NODE_OPTIONS='--openssl-legacy-provider' turbo run build --filter=sanity",
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "build:web": "turbo run build --filter=web",
+    "build:sanity": "turbo run build --filter=sanity",
     "lint": "run-p lint:*",
     "lint:eslint": "turbo run lint --continue",
     "lint:types": "tsc --build",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "upgrade": "manypkg upgrade tamagui && manypkg upgrade @tamagui && manypkg upgrade tamagui-loader",
-    "clean": "rimraf {packages,apps}/**/{.next,dist,build,.turbo,.expo,.tamagui,.sanity} node_modules",
+    "clean": "rimraf {packages,apps}/**/{.next,dist,build,.turbo,.sanity} node_modules",
     "pretty": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "dependencies": {
     "dotenv-cli": "^6.0.0"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.4.7",
-    "@changesets/cli": "^2.25.2",
-    "@changesets/get-github-info": "^0.5.1",
-    "@changesets/get-release-plan": "^3.0.15",
-    "@changesets/types": "^5.2.0",
+    "@changesets/changelog-github": "^0.4.8",
+    "@changesets/cli": "^2.26.0",
+    "@changesets/get-github-info": "^0.5.2",
+    "@changesets/get-release-plan": "^3.0.16",
+    "@changesets/types": "^5.2.1",
     "@manypkg/cli": "^0.19.2",
     "@sanity/cli": "latest",
-    "@types/node": "^18.11.9",
-    "@types/react": "^18.0.25",
-    "@types/react-native": "^0.70.7",
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.26",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.0",
-    "rimraf": "^3.0.2",
+    "rimraf": "^4.1.0",
     "turbo": "latest",
     "typescript": "^4.9.0"
   },
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "pnpm@7.25.0",
+  "pnpm": {
+    "patchedDependencies": {
+      "eslint-plugin-chakra-ui@0.7.6": "patches/eslint-plugin-chakra-ui@0.7.6.patch"
+    }
+  }
 }

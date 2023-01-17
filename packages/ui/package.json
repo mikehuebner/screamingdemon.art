@@ -1,31 +1,28 @@
 {
-  "name": "@screamingdemonart/ui",
+  "name": "@screamingdemon/ui",
   "version": "0.0.1",
   "sideEffects": [
     "*.css"
   ],
   "private": true,
-  "types": "./types/index",
-  "main": "src/index.tsx",
-  "module:jsx": "src",
+  "main": "src/index.ts",
   "files": [
     "types",
     "dist"
   ],
+  "license": "MIT",
   "scripts": {
-    "build": "tamagui-build",
-    "watch": "tamagui-build --watch"
+    "lint": "eslint *.ts*"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.4.9",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@next/font": "^13.0.7",
-    "@tamagui/animations-reanimated": "^1.0.2",
-    "@tamagui/config-base": "^1.0.2",
-    "@tamagui/font-inter": "^1.0.2",
-    "@tamagui/shorthands": "^1.0.2",
-    "@tamagui/theme-base": "^1.0.2",
-    "tamagui": "^1.0.2"
+    "framer-motion": "^8.4.3"
   },
   "devDependencies": {
-    "@tamagui/build": "^1.0.2"
+    "@screamingdemon/eslint-config-screamingdemon": "workspace:*",
+    "typescript": "^4.9.4"
   }
 }

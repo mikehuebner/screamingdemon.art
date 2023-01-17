@@ -1,41 +1,40 @@
-import { forwardRef, useCallback, useState } from 'react'
-import { LayoutChangeEvent } from 'react-native'
+import { forwardRef, useEffect, useRef, useState } from 'react'
 
 import { CgMenuMotion } from 'react-icons/cg'
 
 import {
-  Button,
-  Paragraph,
-  ParagraphProps,
-  Sheet,
-  Stack,
-  XStack,
-  YStack,
-} from '@screamingdemonart/ui'
+  Box,
+  HStack,
+  HTMLChakraProps,
+  IconButton,
+  Text,
+  TextProps,
+  VStack,
+} from '@screamingdemon/ui'
+import { useScroll } from 'framer-motion'
 import NextLink from 'next/link'
-import { useRouter } from 'next/router'
 
 import { HeadLogo, WordLogo } from './logo'
 
-const HeadAnchor = forwardRef<typeof Paragraph, ParagraphProps>((props, ref) => (
-  <Paragraph
+const HeadAnchor = forwardRef<typeof Text, TextProps>((props, ref) => (
+  <Text
     ref={ref as any}
-    m="$2"
-    px="$5"
-    py="$2"
-    cursor="pointer"
-    opacity={0.65}
-    animation="fast"
-    hoverStyle={{ opacity: 1 }}
-    pressStyle={{ opacity: 0.25 }}
-    textDecorationLine="none"
-    tag="a"
+    justifyContent="flex-end"
     w="100%"
+    m="$2"
+    px={5}
+    py="$2"
     fontWeight="bold"
     letterSpacing={1.2}
-    // @ts-ignore
+    opacity={0.65}
+    animation="fast"
+    cursor="pointer"
+    hoverStyle={{ opacity: 1 }}
+    pressStyle={{ opacity: 0.25 }}
     tabIndex={-1}
-    jc="flex-end"
+    // @ts-ignore
+    tag="a"
+    textDecorationLine="none"
     {...props}
   />
 ))
@@ -71,17 +70,15 @@ const Menu = () => {
 
   return (
     <>
-      <Button
-        onPress={() => setOpen(true)}
-        bg="$backgroundTransparent"
-        px="$2"
-        scaleIcon={2}
+      <IconButton
+        display={[null, 'none']}
+        px={2}
+        bg="transparent"
+        aria-label="Menu"
         icon={<CgMenuMotion />}
-        $gtMd={{
-          display: 'none',
-        }}
+        onClick={() => setOpen(true)}
       />
-      <Sheet
+      {/* <Sheet
         modal
         open={open}
         onOpenChange={setOpen}
@@ -92,89 +89,62 @@ const Menu = () => {
         <Sheet.Overlay />
         <Sheet.Frame>
           <Sheet.Handle />
-          <Stack ai="center" jc="center" h="100%" w="100%" bg="$background">
+          <Stack alignItems="center" justifyContent="center" h="100%" w="100%" bg="$background">
             <HeaderLinks />
           </Stack>
         </Sheet.Frame>
-      </Sheet>
+      </Sheet> */}
     </>
   )
 }
 
-export const Header = (props: any) => {
-  const [headerHeight, setHeaderHeight] = useState(54)
-  const router = useRouter()
+export const Header = ({ maxW = '7xl', ...props }: HTMLChakraProps<'header'>) => {
+  const [y, setY] = useState(0)
+  const ref = useRef<HTMLHeadingElement>(null)
+  const { height = 0 } = ref.current?.getBoundingClientRect() ?? {}
 
-  const handleOnLayout = useCallback((event: LayoutChangeEvent) => {
-    const { height } = event.nativeEvent.layout
-    setHeaderHeight(height)
-  }, [])
+  const { scrollY } = useScroll()
+
+  useEffect(() => scrollY.onChange(() => setY(scrollY.get())), [scrollY])
 
   return (
-    <>
-      <XStack
-        onLayout={handleOnLayout}
-        y={0}
-        bbc="$borderColor"
-        zi={50000}
+    <HStack
+      ref={ref}
+      as="header"
+      pos="fixed"
+      zIndex="3"
+      top="0"
+      right="0"
+      left="0"
+      w="full"
+      bg={y <= height ? 'transparent' : 'white'}
+      shadow={y > height ? 'xs' : undefined}
+      _dark={{ bg: 'gray.800' }}
+      transition="box-shadow 0.2s, background-color 0.2s"
+      style={{
         // @ts-ignore
-        pos="fixed"
-        top={0}
-        left={0}
-        right={0}
-        // elevation="$3"
-        style={{
-          // @ts-ignore
-          backdropFilter: 'blur(10px)',
-        }}
-      >
-        <XStack
-          ai="center"
-          position="relative"
-          tag="header"
-          jc="space-between"
-          pos="relative"
-          py="$4"
-          px="$4"
-          w="100%"
-          // okay...
-          zi={50000}
-        >
-          <XStack flex={1} ai="center" space="$4">
-            <Menu />
-            <NextLink href="/" passHref>
-              <YStack h="$6" w="$6" jc="center">
-                <HeadLogo fill="lightgrey" />
-              </YStack>
-            </NextLink>
-            <YStack
-              $sm={{
-                opacity: 0,
-                pointerEvents: 'none',
-              }}
-              h="$3"
-              jc="center"
-            >
-              <WordLogo fill="lightgrey" width="100%" />
-            </YStack>
-          </XStack>
+        backdropFilter: 'blur(10px)',
+      }}
+    >
+      <Box maxW={maxW} h="4.5rem" mx="auto">
+        <HStack alignItems="center" flex={1} gap={4}>
+          <Menu />
+          <NextLink href="/" passHref>
+            <VStack justifyContent="center" w="$6" h="$6">
+              <HeadLogo fill="lightgrey" />
+            </VStack>
+          </NextLink>
+          <VStack justifyContent="center" h={3} opacity={[0, 1]} pointerEvents={['none', 'auto']}>
+            <WordLogo fill="lightgrey" width="100%" />
+          </VStack>
+        </HStack>
 
-          {/*  prevent layout shift */}
-          <XStack jc="flex-end" pointerEvents="auto" tag="nav">
-            <XStack
-              ai="center"
-              space="$3"
-              display="none"
-              $gtMd={{
-                display: 'flex',
-              }}
-            >
-              <HeaderLinks {...props} />
-            </XStack>
-          </XStack>
-        </XStack>
-      </XStack>
-      <YStack h={headerHeight} w="100%" />
-    </>
+        <HStack as="nav" justifyContent="flex-end" pointerEvents="auto">
+          <HStack alignItems="center" gap={3} display={['none', 'flex']}>
+            <HeaderLinks {...props} />
+          </HStack>
+        </HStack>
+      </Box>
+    </HStack>
   )
 }

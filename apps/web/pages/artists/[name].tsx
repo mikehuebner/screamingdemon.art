@@ -1,38 +1,31 @@
 import Masonry from 'react-masonry-css'
-import Carousel from 'react-native-reanimated-carousel'
 
 import { GetServerSidePropsContext, InferGetStaticPropsType } from 'next'
 import { groq } from 'next-sanity'
 
-import { Button, H1, Paragraph, Stack, useWindowDimensions, YStack } from '@screamingdemonart/ui'
-import { ChevronLeft } from '@tamagui/lucide-icons'
-import { useLink } from 'solito/link'
+import { Box, Heading, HStack, Stack, Text } from '@screamingdemon/ui'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 import { DisplayImage } from '~/components/display-image'
 import { createSSG, type ImageSource } from '~/server'
 import { trpc } from '~/utils'
 
-const Gallery = ({ images }: { images: ImageSource[] }) => {
-  const { width } = useWindowDimensions()
-  return (
-    <Stack flex={1}>
-      <Carousel
-        loop
-        width={width}
-        height={width / 2}
-        autoPlay
-        autoPlayInterval={5000}
-        data={images}
-        scrollAnimationDuration={1000}
-        renderItem={({ index }) => (
-          <Stack flex={1} userSelect="none">
-            <DisplayImage image={images[index]} />
-          </Stack>
-        )}
-      />
-    </Stack>
-  )
-}
+const Gallery = ({ images }: { images: ImageSource[] }) => (
+  <Swiper
+    spaceBetween={50}
+    slidesPerView={3}
+    onSlideChange={() => console.log('slide change')}
+    onSwiper={(swiper) => console.log(swiper)}
+  >
+    {images.map((image, index) => (
+      <SwiperSlide key={index}>
+        <Stack flex={1} userSelect="none">
+          <DisplayImage image={image} />
+        </Stack>
+      </SwiperSlide>
+    ))}
+  </Swiper>
+)
 
 export async function getStaticPaths() {
   // When this is true (in preview environments) don't
@@ -84,7 +77,6 @@ export async function getStaticProps(
 export default function ArtistDetailsScreen({
   name,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const linkProps = useLink({ href: '/' })
   const { data: artistData } = trpc.artists.get.useQuery({
     id: name,
     query: groq`
@@ -103,26 +95,21 @@ export default function ArtistDetailsScreen({
   }
 
   return (
-    <YStack f={1} jc="center" space>
-      <H1 fow="800">{`${artistData.name}`}</H1>
-      <Paragraph fow="800">{artistData.bio}</Paragraph>
+    <HStack justifyContent="center" gap={1}>
+      <Heading fontWeight="800">{`${artistData.name}`}</Heading>
+      <Text fontWeight="800">{artistData.bio}</Text>
       {artistData.gallery && <Gallery images={artistData.gallery} />}
       <Masonry
         breakpointCols={3}
-        className="screamingdemonart-masonry-grid"
-        columnClassName="screamingdemonart-masonry-grid_column"
+        className="screamingdemon-masonry-grid"
+        columnClassName="screamingdemon-masonry-grid_column"
       >
         {artistData.gallery?.map((image) => (
-          <Stack bg="#5A5A5A" m="$2" br="$3" overflow="hidden" key={image.asset._id}>
+          <Box key={image.asset._id} overflow="hidden" m={2} bg="#5A5A5A" borderRadius="md">
             <DisplayImage image={image} />
-          </Stack>
+          </Box>
         ))}
       </Masonry>
-
-      {/* @ts-ignore fix button props not lining up */}
-      <Button {...linkProps} icon={ChevronLeft}>
-        Go Home
-      </Button>
-    </YStack>
+    </HStack>
   )
 }

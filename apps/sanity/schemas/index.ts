@@ -67,7 +67,7 @@ const annotations = [
   annotationProduct,
 
   /**
-   * @screamingdemonart
+   * @screamingdemon
    */
 ]
 
@@ -83,7 +83,7 @@ const documents = [
   productVariant,
 
   /**
-   * @screamingdemonart
+   * @screamingdemon
    */
 
   artists,
@@ -100,7 +100,7 @@ const singletons = [
   settings,
 
   /**
-   * @screamingdemonart
+   * @screamingdemon
    */
 
   home,
@@ -145,7 +145,7 @@ const objects = [
   shopifyProductVariant,
 
   /**
-   * @screamingdemonart
+   * @screamingdemon
    */
 
   socialEtsy,

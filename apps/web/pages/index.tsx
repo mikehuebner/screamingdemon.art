@@ -1,26 +1,21 @@
-import { Stack, Button, XStack, YStack } from '@screamingdemonart/ui'
-import { useLink } from 'solito/link'
+import { Button, Box, HStack } from '@screamingdemon/ui'
+import Link from 'next/link'
 
 import { HeadLogo, WordLogo } from '~/components/logo'
 
 export default function HomeScreen() {
-  const linkProps = useLink({
-    href: '/artists',
-  })
-
   return (
-    <Stack h="100%" fg={1}>
-      <YStack f={1} jc="center" ai="center" p="$4" space>
-        <YStack space="$4" maw={600} w="100%">
+    <Box flexGrow={1} h="full">
+      <HStack alignItems="center" justifyContent="center" flex={1} p={4}>
+        <HStack gap={4} w="full" maxW={600}>
           <HeadLogo fill="lightgrey" />
           <WordLogo fill="lightgrey" />
-        </YStack>
+        </HStack>
 
-        <XStack>
-          {/* @ts-ignore onclick method not working with solito */}
-          <Button {...linkProps}>All Artists</Button>
-        </XStack>
-      </YStack>
-    </Stack>
+        <Link href="/artists" passHref>
+          <Button>All Artists</Button>
+        </Link>
+      </HStack>
+    </Box>
   )
 }

@@ -1,13 +1,12 @@
 import Masonry from 'react-masonry-css'
-import { Pressable } from 'react-native'
 
 import { FiArrowRight } from 'react-icons/fi'
 
 import { useNextSanityImage } from 'next-sanity-image'
 
-import { Button, H1, Paragraph, Stack, XStack, YStack } from '@screamingdemonart/ui'
+import { Box, Button, Heading, HStack, Text, VStack } from '@screamingdemon/ui'
 import Image from 'next/image'
-import { useLink } from 'solito/link'
+import Link from 'next/link'
 
 import { DisplayImage } from '~/components/display-image'
 import { createSanity, createSSG, type Artist } from '~/server'
@@ -27,126 +26,79 @@ export async function getStaticProps() {
 
 const ArtistCard = ({ name, slug, bio, portrait, gallery }: Artist) => {
   const imageProps = useNextSanityImage(createSanity, portrait ?? null)
-  const linkProps = useLink({
-    href: '/artists/[name]',
-    as: `/artists/${slug}`,
-  })
 
   return (
-    <Pressable {...linkProps} style={{ width: '100%' }}>
-      <XStack
-        bg="$gray2Dark"
-        overflow="hidden"
-        maxHeight="365px"
-        width="100%"
-        flexGrow={1}
-        borderRadius="$3"
-      >
-        <YStack
-          fullscreen
-          l="45%"
-          $sm={{
-            l: 0,
-          }}
-        >
-          <Masonry
-            breakpointCols={3}
-            className="screamingdemonart-masonry-grid"
-            columnClassName="screamingdemonart-masonry-grid_column"
-          >
-            {gallery
-              ?.sort(() => 0.5 - Math.random())
-              .map((image, index) => (
-                <Stack
-                  bg="#5A5A5A"
-                  m="$2"
-                  br="$3"
-                  overflow="hidden"
-                  key={`${image.asset._id}-${index}`}
-                >
-                  <DisplayImage image={image} />
-                </Stack>
-              ))}
-          </Masonry>
-        </YStack>
-
-        <XStack
-          flexShrink={1}
-          bg="rgba(43, 43, 43, 0.4)"
+    <Link href={`/artists/${slug}`} passHref>
+      <Box as="a" style={{ width: '100%' }}>
+        <VStack
+          flexGrow={1}
+          overflow="hidden"
           w="100%"
-          style={{
-            // @ts-ignore
-            backdropFilter: 'blur(4px)',
-          }}
+          maxH="365px"
+          bg="$gray2Dark"
+          borderRadius="$3"
         >
-          {portrait && imageProps && (
-            <Stack
-              $sm={{
-                display: 'none',
-              }}
+          <VStack left={[0, '45%']}>
+            <Masonry
+              breakpointCols={3}
+              className="screamingdemon-masonry-grid"
+              columnClassName="screamingdemon-masonry-grid_column"
             >
-              <Image
-                {...imageProps}
-                style={{ width: '100%', height: '100%' }} // layout="responsive" prior to Next 13.0.0
-                sizes="(max-width: 800px) 150px, 300px"
-                alt={name}
-                draggable={false}
-              />
-            </Stack>
-          )}
-          <XStack
-            justifyContent="space-between"
-            alignItems="center"
+              {gallery
+                ?.sort(() => 0.5 - Math.random())
+                .map((image, index) => (
+                  <Box
+                    key={`${image.asset._id}-${index}`}
+                    overflow="hidden"
+                    m={2}
+                    bg="#5A5A5A"
+                    borderRadius="md"
+                  >
+                    <DisplayImage image={image} />
+                  </Box>
+                ))}
+            </Masonry>
+          </VStack>
+
+          <HStack
             flexShrink={1}
-            p="$8"
-            space
             w="100%"
-            $sm={{
-              space: 0,
-              // p: '$4',
-              justifyContent: 'center',
+            bg="rgba(43, 43, 43, 0.4)"
+            style={{
+              // @ts-ignore
+              backdropFilter: 'blur(4px)',
             }}
           >
-            <YStack
-              space
+            {portrait && imageProps && (
+              <Box display={['none', null]}>
+                <Image
+                  {...imageProps}
+                  style={{ width: '100%', height: '100%' }} // layout="responsive" prior to Next 13.0.0
+                  sizes="(max-width: 800px) 150px, 300px"
+                  alt={name}
+                  draggable={false}
+                />
+              </Box>
+            )}
+            <HStack
+              alignItems="center"
+              justifyContent="space-between"
               flexShrink={1}
-              $sm={{
-                space: 0,
-              }}
+              w="full"
+              p={8}
             >
-              <H1
-                fontFamily="$butcher"
-                $sm={{
-                  fontSize: '$10',
-                }}
-              >
-                {name}
-              </H1>
-              {bio && (
-                <Paragraph
-                  flexWrap="wrap"
-                  numberOfLines={4}
-                  $sm={{
-                    display: 'none',
-                  }}
-                >
-                  {bio}
-                </Paragraph>
-              )}
-            </YStack>
-            <Button
-              size="$4"
-              $sm={{
-                display: 'none',
-              }}
-              bg="$backgroundTransparent"
-            >
-              <FiArrowRight />
-            </Button>
-          </XStack>
-        </XStack>
-      </XStack>
-    </Pressable>
+              <HStack flexShrink={1}>
+                <Heading fontFamily="$butcher">{name}</Heading>
+                {bio && <Text flexWrap="wrap">{bio}</Text>}
+              </HStack>
+              <Button bg="transparent">
+                <FiArrowRight />
+              </Button>
+            </HStack>
+          </HStack>
+        </VStack>
+      </Box>
+    </Link>
   )
 }
 
@@ -154,10 +106,10 @@ export default function ArtistsScreen() {
   const { data: artistData } = trpc.artists.list.useQuery()
 
   return (
-    <YStack f={1} jc="center" ai="center" space px="$4">
+    <VStack alignItems="center" justifyContent="center" flex={1} px={4}>
       {artistData?.map((artist) => (
         <ArtistCard key={artist._id} {...artist} />
       ))}
-    </YStack>
+    </VStack>
   )
 }

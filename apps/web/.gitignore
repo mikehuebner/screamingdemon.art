@@ -32,9 +32,6 @@ yarn-error.log*
 # vercel
 .vercel
 
-# tamagui
-.tamagui
-
 # package.json is generarted on build - off for changesets, just override it on build
 # package.json
 

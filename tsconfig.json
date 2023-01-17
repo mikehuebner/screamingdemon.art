@@ -3,9 +3,9 @@
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
     "paths": {
-      "@screamingdemonart/app/*": ["./packages/app/*"],
-      "@screamingdemonart/ui/*": ["./packages/ui/*"],
-      "@screamingdemonart/config/*": ["./packages/config/*"]
+      "@screamingdemon/app/*": ["./packages/app/*"],
+      "@screamingdemon/ui/*": ["./packages/ui/*"],
+      "@screamingdemon/config/*": ["./packages/config/*"]
     }
   },
   "extends": "./tsconfig.base"

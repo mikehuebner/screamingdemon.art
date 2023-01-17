@@ -1,23 +1,18 @@
-/* eslint-disable import/order */
-
-import 'raf/polyfill'
-import 'setimmediate'
-import '@tamagui/core/reset.css'
+// eslint-disable-next-line import/order
 import '~/styles/react-masonry-styles.css'
 
-import { useMemo } from 'react'
-
-import { Provider as TamaguiProvider } from '@screamingdemonart/app/provider'
-import { NextThemeProvider, useRootTheme } from '@tamagui/next-theme'
-import Head from 'next/head'
+import { IntlProvider } from 'react-intl'
 
 import { Nunito_Sans } from '@next/font/google'
 import localFont from '@next/font/local'
+import { ChakraProvider, SimpleGrid, Box, extendTheme } from '@screamingdemon/ui'
+import { AppProps } from 'next/app'
+import Head from 'next/head'
 
+import { Footer } from '~/components/footer'
+import { Header } from '~/components/header'
+import theme from '~/theme'
 import { trpc } from '~/utils'
-
-import type { SolitoAppProps } from 'solito'
-import { Layout } from '~/components/layout'
 
 const NunitoSans = Nunito_Sans({
   variable: '--nunito-sans',
@@ -28,19 +23,20 @@ const NunitoSans = Nunito_Sans({
 
 const ButcherTheBaker = localFont({ src: '../assets/butcher-the-baker.otf' })
 
-function App({ Component, pageProps }: SolitoAppProps) {
-  const [theme, setTheme] = useRootTheme()
-  const contents = useMemo(() => {
-    // @ts-ignore
-    return (
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    )
-  }, [Component, pageProps])
+const addedFontTheme = extendTheme(
+  {
+    fonts: {
+      heading: NunitoSans.style.fontFamily,
+      body: NunitoSans.style.fontFamily,
+      butcher: ButcherTheBaker.style.fontFamily,
+    },
+  },
+  theme
+)
 
-  return (
-    <>
+const App = ({ Component, pageProps: { ...pageProps } }: AppProps) => (
+  <ChakraProvider theme={addedFontTheme}>
+    <IntlProvider locale="en">
       <Head>
         <title>Screaming Demon Art</title>
         <meta
@@ -53,19 +49,15 @@ function App({ Component, pageProps }: SolitoAppProps) {
         <link href="/favicon-light.svg" rel="icon" media="(prefers-color-scheme: light)" />
         <link href="/favicon-dark.svg" rel="icon" media="(prefers-color-scheme: dark)" />
       </Head>
-      <style jsx global>{`
-        :root {
-          --nunito-sans: ${NunitoSans.style.fontFamily};
-          --butcher-the-baker: ${ButcherTheBaker.style.fontFamily};
-        }
-      `}</style>
-      <NextThemeProvider onChangeTheme={setTheme}>
-        <TamaguiProvider disableRootThemeClass defaultTheme={theme}>
-          <main>{contents}</main>
-        </TamaguiProvider>
-      </NextThemeProvider>
-    </>
-  )
-}
+      <SimpleGrid columnGap={1} templateRows="auto 1fr auto" minH="100vh">
+        <Header />
+        <Box as="main" w="full" mt="20" mx="auto">
+          <Component {...pageProps} />
+        </Box>
+        <Footer />
+      </SimpleGrid>
+    </IntlProvider>
+  </ChakraProvider>
+)
 
 export default trpc.withTRPC(App)

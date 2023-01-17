@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "plugins": [
       {
@@ -9,9 +9,7 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "react-native": ["react-native-web"],
-      "~/*": ["*"],
-      "*": ["types"]
+      "~/*": ["*"]
     },
     "allowJs": true,
     "skipLibCheck": true,
