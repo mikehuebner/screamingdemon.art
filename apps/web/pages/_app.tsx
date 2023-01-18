@@ -1,17 +1,18 @@
 // eslint-disable-next-line import/order
-import '~/styles/react-masonry-styles.css'
+import 'swiper/css'
+// eslint-disable-next-line import/order
+import 'swiper/css/effect-fade'
 
 import { IntlProvider } from 'react-intl'
 
 import { Nunito_Sans } from '@next/font/google'
 import localFont from '@next/font/local'
-import { ChakraProvider, SimpleGrid, Box, extendTheme } from '@screamingdemon/ui'
+import { ChakraProvider, SimpleGrid, Box, extendTheme, theme } from '@screamingdemon/ui'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 
 import { Footer } from '~/components/footer'
 import { Header } from '~/components/header'
-import theme from '~/theme'
 import { trpc } from '~/utils'
 
 const NunitoSans = Nunito_Sans({

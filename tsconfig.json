@@ -1,12 +1,7 @@
 {
   "compilerOptions": {
     "strictNullChecks": true,
-    "noUncheckedIndexedAccess": true,
-    "paths": {
-      "@screamingdemon/app/*": ["./packages/app/*"],
-      "@screamingdemon/ui/*": ["./packages/ui/*"],
-      "@screamingdemon/config/*": ["./packages/config/*"]
-    }
+    "noUncheckedIndexedAccess": true
   },
   "extends": "./tsconfig.base"
 }

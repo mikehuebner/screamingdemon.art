@@ -2,38 +2,25 @@ import { forwardRef, useEffect, useRef, useState } from 'react'
 
 import { CgMenuMotion } from 'react-icons/cg'
 
-import {
-  Box,
-  HStack,
-  HTMLChakraProps,
-  IconButton,
-  Text,
-  TextProps,
-  VStack,
-} from '@screamingdemon/ui'
+import { Box, HStack, HTMLChakraProps, IconButton, Link, LinkProps } from '@screamingdemon/ui'
 import { useScroll } from 'framer-motion'
 import NextLink from 'next/link'
 
 import { HeadLogo, WordLogo } from './logo'
 
-const HeadAnchor = forwardRef<typeof Text, TextProps>((props, ref) => (
-  <Text
-    ref={ref as any}
-    justifyContent="flex-end"
-    w="100%"
-    m="$2"
+// any, cause I don't wanna figure this one out right now
+const HeadAnchor = forwardRef<any, LinkProps>((props, ref) => (
+  <Link
+    ref={ref}
     px={5}
-    py="$2"
-    fontWeight="bold"
+    fontWeight="800"
     letterSpacing={1.2}
-    opacity={0.65}
+    opacity={0.5}
+    _hover={{ opacity: 1 }}
+    _pressed={{ opacity: 0.25 }}
     animation="fast"
     cursor="pointer"
-    hoverStyle={{ opacity: 1 }}
-    pressStyle={{ opacity: 0.25 }}
     tabIndex={-1}
-    // @ts-ignore
-    tag="a"
     textDecorationLine="none"
     {...props}
   />
@@ -43,23 +30,23 @@ HeadAnchor.displayName = 'HeadAnchor'
 
 export const HeaderLinks = () => (
   <>
-    <NextLink legacyBehavior prefetch={false} href="/artists" passHref>
+    <NextLink href="/artists" passHref>
       <HeadAnchor>Artists</HeadAnchor>
     </NextLink>
 
-    <NextLink legacyBehavior prefetch={false} href="/events" passHref>
+    <NextLink href="/events" passHref>
       <HeadAnchor>Events</HeadAnchor>
     </NextLink>
 
-    <NextLink legacyBehavior prefetch={false} href="/store" passHref>
+    <NextLink href="/store" passHref>
       <HeadAnchor>Store</HeadAnchor>
     </NextLink>
 
-    <NextLink legacyBehavior prefetch={false} href="/about" passHref>
+    <NextLink href="/about" passHref>
       <HeadAnchor>About</HeadAnchor>
     </NextLink>
 
-    <NextLink legacyBehavior prefetch={false} href="/contact" passHref>
+    <NextLink href="/contact" passHref>
       <HeadAnchor>Contact</HeadAnchor>
     </NextLink>
   </>
@@ -71,12 +58,11 @@ const Menu = () => {
   return (
     <>
       <IconButton
-        display={[null, 'none']}
-        px={2}
-        bg="transparent"
-        aria-label="Menu"
+        display={['flex', null, 'none']}
+        fontSize="20px"
+        aria-label="Open menu"
         icon={<CgMenuMotion />}
-        onClick={() => setOpen(true)}
+        variant="ghost"
       />
       {/* <Sheet
         modal
@@ -108,7 +94,7 @@ export const Header = ({ maxW = '7xl', ...props }: HTMLChakraProps<'header'>) =>
   useEffect(() => scrollY.onChange(() => setY(scrollY.get())), [scrollY])
 
   return (
-    <HStack
+    <Box
       ref={ref}
       as="header"
       pos="fixed"
@@ -117,34 +103,37 @@ export const Header = ({ maxW = '7xl', ...props }: HTMLChakraProps<'header'>) =>
       right="0"
       left="0"
       w="full"
-      bg={y <= height ? 'transparent' : 'white'}
       shadow={y > height ? 'xs' : undefined}
-      _dark={{ bg: 'gray.800' }}
       transition="box-shadow 0.2s, background-color 0.2s"
+      backdropBlur="md"
       style={{
         // @ts-ignore
         backdropFilter: 'blur(10px)',
       }}
     >
-      <Box maxW={maxW} h="4.5rem" mx="auto">
-        <HStack alignItems="center" flex={1} gap={4}>
+      <HStack alignItems="center" justify="space-between" maxW={maxW} mx="auto" px="6">
+        <HStack alignItems="center" justify="space-between" w="full">
+          <Box py={1}>
+            <NextLink href="/" passHref>
+              <HStack as="span" alignItems="center" gap={1}>
+                <Box w="80px" h="full">
+                  <HeadLogo fill="lightgrey" />
+                </Box>
+                <Box display={['none', 'none', 'none', 'block']}>
+                  <WordLogo fill="lightgrey" width="100%" />
+                </Box>
+              </HStack>
+            </NextLink>
+          </Box>
           <Menu />
-          <NextLink href="/" passHref>
-            <VStack justifyContent="center" w="$6" h="$6">
-              <HeadLogo fill="lightgrey" />
-            </VStack>
-          </NextLink>
-          <VStack justifyContent="center" h={3} opacity={[0, 1]} pointerEvents={['none', 'auto']}>
-            <WordLogo fill="lightgrey" width="100%" />
-          </VStack>
         </HStack>
 
         <HStack as="nav" justifyContent="flex-end" pointerEvents="auto">
-          <HStack alignItems="center" gap={3} display={['none', 'flex']}>
+          <HStack alignItems="center" gap={3} display={['none', null, 'flex']}>
             <HeaderLinks {...props} />
           </HStack>
         </HStack>
-      </Box>
-    </HStack>
+      </HStack>
+    </Box>
   )
 }

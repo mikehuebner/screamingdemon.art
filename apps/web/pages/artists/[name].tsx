@@ -1,9 +1,10 @@
-import Masonry from 'react-masonry-css'
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 
 import { GetServerSidePropsContext, InferGetStaticPropsType } from 'next'
 import { groq } from 'next-sanity'
 
-import { Box, Heading, HStack, Stack, Text } from '@screamingdemon/ui'
+import { Box, Container, Heading, Stack, Text } from '@screamingdemon/ui'
+import { Virtual } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import { DisplayImage } from '~/components/display-image'
@@ -14,8 +15,12 @@ const Gallery = ({ images }: { images: ImageSource[] }) => (
   <Swiper
     spaceBetween={50}
     slidesPerView={3}
+    pagination={{ clickable: true }}
+    scrollbar={{ draggable: true }}
     onSlideChange={() => console.log('slide change')}
     onSwiper={(swiper) => console.log(swiper)}
+    modules={[Virtual]}
+    virtual
   >
     {images.map((image, index) => (
       <SwiperSlide key={index}>
@@ -95,21 +100,21 @@ export default function ArtistDetailsScreen({
   }
 
   return (
-    <HStack justifyContent="center" gap={1}>
+    <Container maxW="7xl">
       <Heading fontWeight="800">{`${artistData.name}`}</Heading>
       <Text fontWeight="800">{artistData.bio}</Text>
       {artistData.gallery && <Gallery images={artistData.gallery} />}
-      <Masonry
-        breakpointCols={3}
-        className="screamingdemon-masonry-grid"
-        columnClassName="screamingdemon-masonry-grid_column"
-      >
-        {artistData.gallery?.map((image) => (
-          <Box key={image.asset._id} overflow="hidden" m={2} bg="#5A5A5A" borderRadius="md">
-            <DisplayImage image={image} />
-          </Box>
-        ))}
-      </Masonry>
-    </HStack>
+      <Box flex={1}>
+        <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
+          <Masonry>
+            {artistData.gallery?.map((image) => (
+              <Box key={image.asset._id} overflow="hidden" m={2} bg="#5A5A5A" borderRadius="md">
+                <DisplayImage image={image} />
+              </Box>
+            ))}
+          </Masonry>
+        </ResponsiveMasonry>
+      </Box>
+    </Container>
   )
 }

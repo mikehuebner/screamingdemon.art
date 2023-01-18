@@ -1,4 +1,4 @@
-import { ColorModeScript } from '@screamingdemon/ui'
+import { ColorModeScript, theme } from '@screamingdemon/ui'
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
@@ -16,7 +16,7 @@ export default function Document() {
         />
       </Head>
       <body>
-        <ColorModeScript />
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <Main />
         <NextScript />
       </body>

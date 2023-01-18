@@ -31,6 +31,7 @@
     "react-icons": "^4.7.1",
     "react-intl": "^6.2.5",
     "react-masonry-css": "^1.0.16",
+    "react-responsive-masonry": "^2.1.7",
     "superjson": "^1.11.0",
     "swiper": "^8.4.5",
     "zod": "^3.19.1"

@@ -1,21 +1,21 @@
-import { Button, Box, HStack } from '@screamingdemon/ui'
+import { Button, VStack, Container } from '@screamingdemon/ui'
 import Link from 'next/link'
 
 import { HeadLogo, WordLogo } from '~/components/logo'
 
 export default function HomeScreen() {
   return (
-    <Box flexGrow={1} h="full">
-      <HStack alignItems="center" justifyContent="center" flex={1} p={4}>
-        <HStack gap={4} w="full" maxW={600}>
+    <Container maxW="7xl">
+      <VStack align="center" justify="center" p={4}>
+        <VStack gap={4} w="full">
           <HeadLogo fill="lightgrey" />
           <WordLogo fill="lightgrey" />
-        </HStack>
+        </VStack>
 
         <Link href="/artists" passHref>
           <Button>All Artists</Button>
         </Link>
-      </HStack>
-    </Box>
+      </VStack>
+    </Container>
   )
 }
